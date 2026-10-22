@@ -1,11 +1,6 @@
-/**
- * Pague Menos Acessível - Script Principal
- * Catálogo Expandido da Pague Menos, Checkout Guiado com IA e Acessibilidade WCAG
- */
 
-// Catálogo Expandido Oficial Pague Menos com Fotos Reais
 const CATALOGO_PRODUTOS = [
-  // --- MEDICAMENTOS ---
+
   {
     id: 'med-01',
     nome: 'Analgésico Dorflex 36 Comprimidos',
@@ -92,7 +87,6 @@ const CATALOGO_PRODUTOS = [
     modoUso: 'Conforme instruções da embalagem oficial.'
   },
 
-  // --- CUIDADOS COM A PELE & DERMOCOSMÉTICOS ---
   {
     id: 'pel-01',
     nome: 'NIVEA Loção Hidratante Milk Pele Seca a Extrasseca 400ml',
@@ -174,7 +168,6 @@ const CATALOGO_PRODUTOS = [
     modoUso: 'Aplicar uma fina camada sobre o rosto limpo pela manhã e à noite.'
   },
 
-  // --- HIGIENE PESSOAL ---
   {
     id: 'hig-01',
     nome: 'Sabonete em Barra Dove Original Hidratante 90g',
@@ -224,7 +217,6 @@ const CATALOGO_PRODUTOS = [
     modoUso: 'Massagear sobre os cabelos molhados até espumar e enxaguar bem.'
   },
 
-  // --- SAÚDE BUCAL ---
   {
     id: 'buc-01',
     nome: 'Escova Dental Sensodyne Sensibilidade & Esmalte Cerda Macia 1 Unidade',
@@ -290,7 +282,6 @@ const CATALOGO_PRODUTOS = [
     modoUso: 'Cortar cerca de 40 cm e passar suavemente entre os espaços interdentais.'
   },
 
-  // --- MAMÃES E BEBÊS ---
   {
     id: 'beb-01',
     nome: 'Fralda Pampers Confort Sec M 70 Unidades',
@@ -340,7 +331,6 @@ const CATALOGO_PRODUTOS = [
     modoUso: 'Aplicar a cada troca de fralda após limpar e secar a pele do bebê.'
   },
 
-  // --- VITAMINAS E BEM-ESTAR ---
   {
     id: 'vit-01',
     nome: 'Suplemento Alimentar Lavitan AZ Original 60 Comprimidos',
@@ -407,7 +397,6 @@ const CATALOGO_PRODUTOS = [
   }
 ];
 
-// Estado Global
 const purchaseStorage = window.PMPrivacy?.storage || sessionStorage;
 let purchaseStorageReady = !window.PMPrivacy;
 const preferences = {
@@ -430,7 +419,6 @@ const appState = {
   carrinho: []
 };
 
-// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
   inicializarEstadoAcessibilidade();
   configurarEventosControles();
@@ -440,9 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
   atualizarDadosUsuarioUI();
 });
 
-/* ==========================================================================
-   1. Card de Boas-Vindas & Instruções Iniciais para Novos Usuários
-   ========================================================================== */
+/* Card de Boas-Vindas & Instruções Iniciais para Novos Usuários */
 
 function verificarCardBoasVindas() {
   const fechado = preferences.get('pm_welcome_closed');
@@ -466,9 +452,7 @@ function fecharCardBoasVindas() {
   notificarAcessibilidade('Instruções iniciais fechadas.');
 }
 
-/* ==========================================================================
-   2. Acessibilidade (Alto Contraste Pague Menos, Zoom e Leitura)
-   ========================================================================== */
+/* Acessibilidade */
 
 function inicializarEstadoAcessibilidade() {
   appState.simpleReading = preferences.get('pm_simple_reading') !== 'false';
@@ -613,9 +597,7 @@ function notificarAcessibilidade(mensagem) {
   if (el) el.textContent = mensagem;
 }
 
-/* ==========================================================================
-   3. Filtragem Reativa de Categorias na Home (CAT-01)
-   ========================================================================== */
+/* Filtragem Reativa de Categorias na Home */
 
 function selecionarCategoria(categoriaId) {
   appState.categoriaAtiva = categoriaId;
@@ -673,7 +655,7 @@ function renderizarProdutosVitrine(categoriaId, resultadosBusca = null) {
       labelSubheading.textContent = `Exibindo ${listaFiltrada.length} produtos em ${nomeCat} (filtrado na Home sem recarregar)`;
     }
   } else {
-    // Na Home Geral, mostra os destaques mais procurados
+
     listaFiltrada = CATALOGO_PRODUTOS;
     if (labelSubheading) {
       labelSubheading.textContent = `Catálogo com ${listaFiltrada.length} produtos. Escolha uma categoria ou busque pelo nome.`;
@@ -745,9 +727,7 @@ function renderizarProdutosVitrine(categoriaId, resultadosBusca = null) {
   }).join('') || '<p class="search-empty" role="status">Nenhum produto encontrado. Tente outro nome, marca ou categoria.</p>';
 }
 
-/* ==========================================================================
-   4. Carrinho de Compras (D33)
-   ========================================================================== */
+/* Carrinho de Compras */
 
 function abrirGavetaCarrinho() {
   const modal = document.getElementById('modal-carrinho');
@@ -960,9 +940,7 @@ function atualizarCarrinhoUI() {
   if (totalEl) totalEl.textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
-/* ==========================================================================
-   5. Checkout & Pagamento Guiado pela Assistente de IA (F04 / D39 / D40)
-   ========================================================================== */
+/* Checkout & Pagamento Guiado pela Assistente de IA */
 
 function iniciarCheckoutGuiadoIA() {
   fecharGavetaCarrinho();
@@ -975,7 +953,6 @@ function iniciarCheckoutGuiadoIA() {
   const modalCheckout = document.getElementById('modal-checkout-ia');
   if (!modalCheckout) return;
 
-  // Atualizar badges
   const totalItens = obterTotalItensCarrinho();
   const subtotal = obterSubtotalCarrinho();
   const frete = subtotal >= 99 ? 0 : 9.90;
@@ -996,7 +973,6 @@ function iniciarCheckoutGuiadoIA() {
   }
   if (totalEl) totalEl.textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-  // Lista dos itens no checkout
   if (itemsContainer) {
     itemsContainer.innerHTML = appState.carrinho.map(item => {
       const itemTotal = (item.preco * item.qtd).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -1011,7 +987,6 @@ function iniciarCheckoutGuiadoIA() {
     }).join('');
   }
 
-  // Renderizar a forma de pagamento ativa
   trocarFormaPagamento(appState.formaPagamentoSelecionada);
 
   modalCheckout.showModal();
@@ -1107,9 +1082,7 @@ function fecharModalSucessoPedido() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ==========================================================================
-   6. Autenticação & Visitante (D37 / D44)
-   ========================================================================== */
+/* Autenticação & Visitante */
 
 function abrirModalAuth() {
   if (window.PMAuth) PMAuth.goToLogin();
@@ -1155,9 +1128,7 @@ function atualizarDadosUsuarioUI() {
   }
 }
 
-/* ==========================================================================
-   7. Detalhes Oficiais do Produto (D32)
-   ========================================================================== */
+/* Detalhes Oficiais do Produto */
 
 function abrirDetalheProduto(nomeProduto) {
   const produto = CATALOGO_PRODUTOS.find(p => p.nome.toLowerCase() === nomeProduto.toLowerCase()) 
@@ -1249,9 +1220,7 @@ function ouvirDescricaoProduto(texto) {
   }
 }
 
-/* ==========================================================================
-   8. CEP (D45) & Busca com Voz
-   ========================================================================== */
+/* CEP & Busca com Voz */
 
 function abrirModalCep() {
   const modal = document.getElementById('modal-cep');
@@ -1362,9 +1331,7 @@ function toggleFavoritoProduto(id, button) {
   }
 }
 
-/* ==========================================================================
-   9. Assistente de IA Autônomo da Pré-Compra ao Pagamento
-   ========================================================================== */
+/* Assistente de IA Autônomo da Pré-Compra ao Pagamento */
 
 function focarAssistenteIA() {
   const sectionIA = document.getElementById('assistente-ia');
@@ -1479,9 +1446,7 @@ function mostrarModalDeclaracaoA11y() {
   location.assign('ajuda.html#guia-de-compra');
 }
 
-/* ==========================================================================
-   10. Toast Feedback
-   ========================================================================== */
+/* Toast Feedback */
 
 let toastTimeout = null;
 function mostrarToast(mensagem) {

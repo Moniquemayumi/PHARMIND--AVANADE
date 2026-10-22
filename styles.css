@@ -1,39 +1,36 @@
-/* ==========================================================================
-   Pague Menos Acessível - Design System Tokens & Global Styles
-   Baseado fielmente na Documentação Mestre Unificada e no Protótipo Figma
-   ========================================================================== */
+/* Variáveis e estilos globais */
 
 :root {
-  /* Tokens Oficiais da Marca e Figma */
-  --color-identity: #1427A0;          /* Azul de identidade */
-  --color-dark-accessible: #102B73;   /* Azul escuro acessível */
-  --color-action-blue: #0F5CC0;       /* Azul de ação */
+ 
+  --color-identity: #1427A0;
+  --color-dark-accessible: #102B73;
+  --color-action-blue: #0F5CC0;
   --color-action-hover: #0c4a9c;
-  --color-accent-red: #D63B4D;        /* Vermelho de destaque */
+  --color-accent-red: #D63B4D;
   --color-accent-red-hover: #b8283a;
-  --color-text-main: #1F2A37;         /* Texto principal */
-  --color-text-muted: #5B6B7F;        /* Texto auxiliar */
-  --color-bg-page: #F5F5F5;           /* Fundo da página */
-  --color-surface: #FFFFFF;           /* Superfície dos cards */
-  --color-surface-soft: #FAFCFF;      /* Superfície suave */
-  --color-border: #E5E7EB;            /* Borda padrão */
+  --color-text-main: #1F2A37;
+  --color-text-muted: #5B6B7F;
+  --color-bg-page: #F5F5F5;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #FAFCFF;
+  --color-border: #E5E7EB;
   --color-border-card: #DCE6F5;
-  --color-blue-soft: #EAF3FF;         /* Azul suave para ícones/badges */
+  --color-blue-soft: #EAF3FF;
   --color-focus: #2259B5;
 
-  /* Escala de fonte dinâmica controlada pelo usuário */
+ 
   --font-scale: 1rem;
   --font-family-base: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-family-reading: 'Lexend', 'Plus Jakarta Sans', sans-serif;
 
-  /* Raios de borda fiéis ao design */
+ 
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Sombras */
+ 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -42,23 +39,19 @@
   --transition-normal: 0.25s ease-in-out;
 }
 
-/* ==========================================================================
-   Modo Alto Contraste Pague Menos (WCAG 2.2 AAA na Paleta da Marca)
-   Baseado na Documentação Mestre: low-vision-bg: #13243B | low-vision-text: #FFF5D6
-   Preserva a identidade visual azul/vermelho sem fugir da marca!
-   ========================================================================== */
+/* Alto contraste */
 body.high-contrast {
-  --color-bg-page: #0B1524;           /* Azul marinho profundo de fundo */
-  --color-surface: #13243B;           /* Superfície dos cards em azul escuro */
+  --color-bg-page: #0B1524;
+  --color-surface: #13243B;
   --color-surface-soft: #1A2F4C;
   --color-dark-accessible: #08101C;
   --color-identity: #BFDBFE;
   --color-action-blue: #BFDBFE;
   --color-action-hover: #DBEAFE;
   --color-accent-red: #FDA4AF;
-  --color-text-main: #FFF5D6;         /* Marfim de alta legibilidade e descanso ocular */
-  --color-text-muted: #D1DEEF;        /* Azul esbranquiçado suave para texto auxiliar */
-  --color-border: #4A6E99;            /* Bordas reforçadas para delimitação clara */
+  --color-text-main: #FFF5D6;
+  --color-text-muted: #D1DEEF;
+  --color-border: #4A6E99;
   --color-border-card: #5D85B8;
   --color-blue-soft: #1E375C;
   --color-focus: #FFF5D6;
@@ -178,9 +171,7 @@ body.highlight-links button.link-arrow {
   font-weight: 700 !important;
 }
 
-/* ==========================================================================
-   Reset & Base Elements
-   ========================================================================== */
+/* Reset & Base Elements */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -270,9 +261,7 @@ ul {
   flex-shrink: 0;
 }
 
-/* ==========================================================================
-   Top Utility Bar
-   ========================================================================== */
+/* Top Utility Bar */
 .top-bar {
   background-color: var(--color-dark-accessible);
   color: #FFFFFF;
@@ -317,9 +306,7 @@ ul {
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* ==========================================================================
-   Header Principal
-   ========================================================================== */
+/* Header Principal */
 .main-header {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
@@ -579,9 +566,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* ==========================================================================
-   Barra de Categorias (Filtragem Dinâmica na mesma Home)
-   ========================================================================== */
+/* Barra de Categorias */
 .nav-categories {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
@@ -703,9 +688,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   cursor: pointer;
 }
 
-/* ==========================================================================
-   Hero Banner Inclusivo
-   ========================================================================== */
+/* Hero Banner Inclusivo */
 .hero-section {
   padding: 28px 0;
 }
@@ -903,9 +886,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   border-color: var(--color-action-blue);
 }
 
-/* ==========================================================================
-   Toggle Switch Totalmente Acessível & Confiável
-   ========================================================================== */
+/* Controles de alternância */
 .switch-wrapper {
   position: relative;
   display: inline-block;
@@ -987,9 +968,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   gap: 10px;
 }
 
-/* ==========================================================================
-   Barra de Vantagens (4 Cards)
-   ========================================================================== */
+/* Barra de Vantagens */
 .section-features {
   padding: 10px 0 24px;
 }
@@ -1048,9 +1027,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   line-height: 1.3;
 }
 
-/* ==========================================================================
-   Explore por Categoria
-   ========================================================================== */
+/* Explore por Categoria */
 .section-categories {
   padding: 24px 0;
 }
@@ -1127,9 +1104,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   line-height: 1.2;
 }
 
-/* ==========================================================================
-   Produtos em Destaque (Cards Reativos)
-   ========================================================================== */
+/* Produtos em Destaque */
 .section-products {
   padding: 28px 0;
 }
@@ -1320,9 +1295,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   transform: translateY(-1px);
 }
 
-/* ==========================================================================
-   Catálogo Integrado de Categorias com Auxílio IA
-   ========================================================================== */
+/* Catálogo Integrado de Categorias com Auxílio IA */
 .section-category-catalog {
   padding: 24px 0 36px;
 }
@@ -1471,9 +1444,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   text-decoration: underline;
 }
 
-/* ==========================================================================
-   Assistente Virtual IA Acessível
-   ========================================================================== */
+/* Assistente Virtual IA Acessível */
 .section-assistant {
   padding: 20px 0 40px;
 }
@@ -1707,9 +1678,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   background-color: var(--color-action-hover);
 }
 
-/* ==========================================================================
-   Footer Institucional
-   ========================================================================== */
+/* Footer Institucional */
 .main-footer {
   background-color: var(--color-dark-accessible);
   color: #FFFFFF;
@@ -1777,9 +1746,7 @@ body.simple-reading .brand-sub { line-height: 1.15; }
   text-align: center;
 }
 
-/* ==========================================================================
-   Modais / Diálogos & Gaveta do Carrinho (D33 / D37 / D32)
-   ========================================================================== */
+/* Modais / Diálogos & Gaveta do Carrinho */
 dialog {
   border: none;
   border-radius: var(--radius-lg);
@@ -1894,9 +1861,7 @@ dialog::backdrop {
   gap: 12px;
 }
 
-/* ==========================================================================
-   Gaveta do Carrinho (D33 Carrinho e Entrega)
-   ========================================================================== */
+/* Gaveta do Carrinho */
 .cart-dialog {
   max-width: 600px;
 }
@@ -2057,9 +2022,7 @@ dialog::backdrop {
   margin-top: 10px;
 }
 
-/* ==========================================================================
-   Modal de Login / Visitante (D37 / D44)
-   ========================================================================== */
+/* Modal de Login / Visitante */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -2101,9 +2064,7 @@ dialog::backdrop {
   padding: 0 10px;
 }
 
-/* ==========================================================================
-   Modal de Detalhes do Produto (D32)
-   ========================================================================== */
+/* Modal de Detalhes do Produto */
 .product-detail-dialog {
   max-width: 620px;
 }
@@ -2147,9 +2108,7 @@ dialog::backdrop {
   margin-bottom: 6px;
 }
 
-/* ==========================================================================
-   Card de Boas-Vindas & Instruções Iniciais para Pessoas Novas (T01 / T02)
-   ========================================================================== */
+/* Card de Boas-Vindas & Instruções Iniciais para Pessoas Novas */
 .welcome-section {
   padding-top: 24px;
 }
@@ -2272,9 +2231,7 @@ dialog::backdrop {
   padding-top: 16px;
 }
 
-/* ==========================================================================
-   Checkout & Pagamento Guiado pela Assistente de IA (F04 / D39 / D40)
-   ========================================================================== */
+/* Checkout & Pagamento Guiado pela Assistente de IA */
 .checkout-dialog {
   max-width: 740px;
   max-height: 90vh;
@@ -2565,9 +2522,7 @@ body.high-contrast .checkout-big-price {
   color: #FFF5D6 !important;
 }
 
-/* ==========================================================================
-   Central de Ajuda, Trocas e Páginas Institucionais com Assistente de IA
-   ========================================================================== */
+/* Central de Ajuda, Trocas e Páginas Institucionais com Assistente de IA */
 .help-hero {
   padding: 36px 0 28px;
   background: linear-gradient(135deg, var(--color-blue-soft) 0%, #E0EEFF 100%);

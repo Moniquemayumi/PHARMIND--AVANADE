@@ -12,11 +12,11 @@
   <link rel="stylesheet" href="accessible-flows.css">
 </head>
 <body>
-  <!-- Link de atalho acessível -->
+  
   <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
   <div id="status-acessibilidade" class="sr-only" aria-live="polite"></div>
 
-  <!-- Top Bar -->
+  
   <div class="top-bar" role="region" aria-label="Avisos e links rápidos">
     <div class="container top-bar-content">
       <div class="top-bar-notice">
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <!-- Header -->
+  
   <header class="main-header" role="banner">
     <div class="container header-container">
       <a href="index.html" class="brand-logo" aria-label="Pague Menos Acessível - Página inicial">
@@ -43,14 +43,14 @@
         </div>
       </a>
 
-      <!-- Atalho Rápido para IA -->
+      
       <button class="action-btn btn-ai-quick-shortcut" onclick="focarAssistenteIA()" aria-label="Abrir conversa direta com a IA">
         <span class="ai-sparkle-icon" aria-hidden="true">✦</span>
         <span>Perguntar para a IA</span>
       </button>
 
       <div class="header-actions">
-        <!-- Controles de Acessibilidade Rápidos -->
+        
         <div class="btn-group-font" role="group" aria-label="Ajuste de tamanho do texto">
           <button type="button" class="btn-font-step" onclick="ajustarEscalaFonte(-1)" aria-label="Diminuir texto">A−</button>
           <button type="button" class="btn-font-step" onclick="ajustarEscalaFonte(1)" aria-label="Aumentar texto">A+</button>
@@ -69,10 +69,10 @@
     </div>
   </header>
 
-  <!-- Conteúdo Principal -->
+  
   <main id="conteudo-principal" tabindex="-1">
     
-    <!-- Hero da Central de Ajuda -->
+    
     <section class="help-hero">
       <div class="container help-hero-container">
         <span class="welcome-badge">Atendimento Inclusivo</span>
@@ -81,7 +81,7 @@
           Tire dúvidas sobre prazos de entrega, bulas de remédios, formas de pagamento ou solicite trocas e devoluções guiadas passo a passo.
         </p>
 
-        <!-- Barra de Busca de Ajuda com Voz -->
+        
         <div class="help-search-box">
           <label for="input-ajuda-busca" class="sr-only">Pesquisar tópico de ajuda</label>
           <input type="search" id="input-ajuda-busca" class="help-search-input" placeholder="Ex: como trocar um produto, prazo de entrega, receita médica..." onkeyup="if(event.key==='Enter') pesquisarAjuda();">
@@ -98,12 +98,12 @@
       </div>
     </section>
 
-    <!-- Cards de Tópicos Mais Buscados -->
+    
     <section class="container help-topics-section">
       <h2 class="section-heading">Tópicos Mais Procurados</h2>
       <div class="help-cards-grid">
         
-        <!-- Card 1: Trocas e Devoluções com IA -->
+        
         <div class="help-topic-card highlight-card" id="card-trocas">
           <div class="help-topic-icon" aria-hidden="true">🔄</div>
           <h3 class="help-topic-title">Trocas & Devoluções Guiadas</h3>
@@ -115,7 +115,7 @@
           </button>
         </div>
 
-        <!-- Card 2: Entrega e Prazos -->
+        
         <div class="help-topic-card">
           <div class="help-topic-icon" aria-hidden="true">🚚</div>
           <h3 class="help-topic-title">Entregas e Prazos</h3>
@@ -127,7 +127,7 @@
           </button>
         </div>
 
-        <!-- Card 3: Receitas e Medicamentos Controlados -->
+        
         <div class="help-topic-card">
           <div class="help-topic-icon" aria-hidden="true">💊</div>
           <h3 class="help-topic-title">Receitas e Medicamentos</h3>
@@ -139,7 +139,7 @@
           </button>
         </div>
 
-        <!-- Card 4: Formas de Pagamento e Pix -->
+        
         <div class="help-topic-card">
           <div class="help-topic-icon" aria-hidden="true">💳</div>
           <h3 class="help-topic-title">Pagamentos & Descontos</h3>
@@ -154,7 +154,7 @@
       </div>
     </section>
 
-    <!-- Seção de Solicitação de Trocas com Assistente de IA -->
+    
     <section class="container" style="margin-top: 40px;" id="secao-troca-guiada">
       <div class="troca-ia-box">
         <div class="troca-ia-header">
@@ -197,7 +197,7 @@
       </div>
     </section>
 
-    <!-- Chatbot Persistente com IA da Central de Ajuda -->
+    
     <section class="section-assistant" id="assistente-ia" style="margin-top: 50px;">
       <div class="container assistant-container">
         <div class="assistant-content">
@@ -279,7 +279,7 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  
   <footer class="main-footer" role="contentinfo">
     <div class="container footer-container">
       <div class="footer-brand-col">
@@ -324,7 +324,7 @@
     </div>
   </footer>
 
-  <!-- Modal Acessibilidade -->
+  
   <dialog id="modal-acessibilidade" class="accessibility-dialog" aria-labelledby="modal-a11y-title">
     <div class="dialog-content">
       <div class="dialog-header">

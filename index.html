@@ -12,13 +12,13 @@
   <link rel="stylesheet" href="accessible-flows.css">
 </head>
 <body>
-  <!-- Link de atalho acessível para saltar para o conteúdo principal (WCAG 2.2) -->
+  
   <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
 
-  <!-- Faixa de anúncios acessíveis e status via aria-live -->
+  
   <div id="status-acessibilidade" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Barra de Notificação Superior (Top Utility Bar) -->
+  
   <div class="top-bar" role="region" aria-label="Avisos e links rápidos">
     <div class="container top-bar-content">
       <div class="top-bar-notice">
@@ -42,10 +42,10 @@
     </div>
   </div>
 
-  <!-- Cabeçalho Principal -->
+  
   <header class="main-header" role="banner">
     <div class="container header-container">
-      <!-- Marca / Logo Oficial da Pague Menos (Sem fundo azul) -->
+      
       <a href="#" class="brand-logo" onclick="resetarFiltroHome(event)" aria-label="Pague Menos Acessível - Voltar ao início da página">
         <img src="assets/logo-pague-menos.png" alt="Pague Menos" class="brand-img">
         <div class="brand-text">
@@ -54,7 +54,7 @@
         </div>
       </a>
 
-      <!-- Seletor de CEP (D44 / D45) -->
+      
       <button class="btn-location" id="btn-cep" onclick="abrirModalCep()" aria-label="Definir CEP de entrega">
         <div class="location-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,7 +71,7 @@
         </svg>
       </button>
 
-      <!-- Barra de Pesquisa com Busca por Voz -->
+      
       <form class="search-form" role="search" id="form-busca" onsubmit="event.preventDefault(); buscarProduto();">
         <label for="campo-busca" class="sr-only">Pesquisar remédios, cosméticos ou itens de saúde</label>
         <div class="search-input-wrapper">
@@ -103,15 +103,15 @@
         </button>
       </form>
 
-      <!-- Ações do Header -->
+      
       <div class="header-actions">
-        <!-- Atalho Rápido para a Assistente de IA -->
+        
         <button class="action-btn btn-ai-quick-shortcut" onclick="focarAssistenteIA()" aria-label="Abrir assistente de IA com voz e texto">
           <span class="ai-sparkle-icon" aria-hidden="true">✦</span>
           <span>Falar com a IA</span>
         </button>
 
-        <!-- Botão Acessibilidade com Dropdown -->
+        
         <button class="action-btn action-accessibility" id="btn-accessibility-quick" onclick="abrirPainelAcessibilidade()" aria-haspopup="dialog" aria-expanded="false" aria-label="Abrir central de recursos de acessibilidade">
           <div class="action-icon-circle">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -122,7 +122,7 @@
           <span>Acessibilidade</span>
         </button>
 
-        <!-- Botão Entrar / Sessão de Visitante (D37 / D44) -->
+        
         <button class="action-btn" id="btn-user-auth" onclick="abrirModalAuth()" aria-label="Acessar sua conta ou gerenciar sessão de visitante">
           <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -131,7 +131,7 @@
           <span id="user-display-name">Olá, visitante</span>
         </button>
 
-        <!-- Botão Carrinho (D33) -->
+        
         <button class="action-btn btn-cart" id="btn-cart" onclick="abrirGavetaCarrinho()" aria-label="Visualizar carrinho de compras">
           <div class="cart-icon-wrapper">
             <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -146,7 +146,7 @@
     </div>
   </header>
 
-  <!-- Barra de Navegação / Categorias (CAT-01: Filtragem Reativa na mesma Home) -->
+  
   <nav class="nav-categories" aria-label="Navegação por categorias e ofertas">
     <div class="container nav-container">
       <div class="nav-left">
@@ -195,10 +195,10 @@
     </div>
   </nav>
 
-  <!-- Conteúdo Principal -->
+  
   <main id="conteudo-principal" tabindex="-1">
     
-    <!-- Card de Boas-Vindas e Instruções para Pessoas Novas (T01 / T02) -->
+    
     <section class="container welcome-section" id="welcome-card-box" aria-labelledby="welcome-title">
       <div class="welcome-card" role="region">
         <div class="welcome-header">
@@ -250,11 +250,11 @@
       </div>
     </section>
 
-    <!-- Hero Banner Inclusivo com Ajustes Imediatos -->
+    
     <section class="hero-section" aria-labelledby="hero-title">
       <div class="container hero-container">
         
-        <!-- Coluna da Mensagem -->
+        
         <div class="hero-content">
           <div class="hero-badge">
             <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -285,7 +285,7 @@
           </div>
         </div>
 
-        <!-- Coluna do Widget Rápido de Acessibilidade -->
+        
         <div class="hero-widget-card" role="region" aria-labelledby="widget-acessibilidade-titulo">
           <div class="widget-header">
             <h2 id="widget-acessibilidade-titulo" class="widget-title">Acessibilidade que acompanha você</h2>
@@ -293,7 +293,7 @@
           </div>
 
           <div class="widget-controls">
-            <!-- Controle 1: Tamanho da Fonte -->
+            
             <div class="control-row">
               <span class="control-label" id="label-fonte">Tamanho do texto</span>
               <div class="btn-group-font" role="group" aria-labelledby="label-fonte">
@@ -302,7 +302,7 @@
               </div>
             </div>
 
-            <!-- Controle 2: Alto Contraste (Paleta Pague Menos Acessível) -->
+            
             <div class="control-row">
               <span class="control-label" id="label-contraste">Alto contraste</span>
               <label for="toggle-contraste" class="switch-wrapper" aria-labelledby="label-contraste">
@@ -311,7 +311,7 @@
               </label>
             </div>
 
-            <!-- Controle 3: Leitura Simplificada (Lexend + Entrelinhas) -->
+            
             <div class="control-row">
               <span class="control-label" id="label-leitura">Leitura simplificada</span>
               <label for="toggle-leitura" class="switch-wrapper" aria-labelledby="label-leitura">
@@ -335,7 +335,7 @@
       </div>
     </section>
 
-    <!-- Barra de Vantagens e Recursos (4 Cards) -->
+    
     <section class="section-features" aria-label="Diferenciais e serviços acessíveis">
       <div class="container features-grid">
         <div class="feature-card">
@@ -392,7 +392,7 @@
       </div>
     </section>
 
-    <!-- Explore por Categoria (Dispara filtragem reativa sem sair da tela - CAT-01) -->
+    
     <section class="section-categories" aria-labelledby="cat-section-title">
       <div class="container">
         <div class="section-header-flex">
@@ -408,7 +408,7 @@
 
         <div class="categories-grid" role="group" aria-label="Selecione uma categoria para filtrar na Home">
           
-          <!-- Card Medicamentos -->
+          
           <button type="button" class="category-card" onclick="selecionarCategoria('medicamentos')" aria-label="Filtrar por Medicamentos">
             <div class="category-icon-circle" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -418,7 +418,7 @@
             <span class="category-name">Medicamentos</span>
           </button>
 
-          <!-- Card Higiene pessoal -->
+          
           <button type="button" class="category-card" onclick="selecionarCategoria('higiene')" aria-label="Filtrar por Higiene pessoal">
             <div class="category-icon-circle" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -428,7 +428,7 @@
             <span class="category-name">Higiene pessoal</span>
           </button>
 
-          <!-- Card Cuidados com a pele -->
+          
           <button type="button" class="category-card" onclick="selecionarCategoria('pele')" aria-label="Filtrar por Cuidados com a pele">
             <div class="category-icon-circle" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -446,7 +446,7 @@
             <span class="category-name">Cuidados com a pele</span>
           </button>
 
-          <!-- Card Saúde bucal -->
+          
           <button type="button" class="category-card" onclick="selecionarCategoria('bucal')" aria-label="Filtrar por Saúde bucal">
             <div class="category-icon-circle" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -459,7 +459,7 @@
             <span class="category-name">Saúde bucal</span>
           </button>
 
-          <!-- Card Mamães e bebês -->
+          
           <button type="button" class="category-card" onclick="selecionarCategoria('bebes')" aria-label="Filtrar por Mamães e bebês">
             <div class="category-icon-circle" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -473,7 +473,7 @@
             <span class="category-name">Mamães e bebês</span>
           </button>
 
-          <!-- Card Vitaminas e bem-estar -->
+          
           <button type="button" class="category-card" onclick="selecionarCategoria('vitaminas')" aria-label="Filtrar por Vitaminas e bem-estar">
             <div class="category-icon-circle" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -486,7 +486,7 @@
       </div>
     </section>
 
-    <!-- Vitrine de Produtos Reativa na Home (CAT-01 / CAT-04) -->
+    
     <section class="section-products" id="destaques" aria-labelledby="products-section-title">
       <div class="container">
         <div class="section-header-flex">
@@ -503,14 +503,14 @@
           </button>
         </div>
 
-        <!-- Grid de Produtos Renderizado Dinamicamente -->
+        
         <div class="products-grid" id="products-grid-container" aria-live="polite">
-          <!-- Conteúdo gerado reativamente por script.js com base nos produtos oficiais -->
+          
         </div>
       </div>
     </section>
 
-    <!-- Explore Produtos por Categoria (Catálogo Estruturado com Auxílio de IA - D43) -->
+    
     <section class="section-category-catalog" id="catalogo" aria-labelledby="cat-catalog-title">
       <div class="container">
         
@@ -529,7 +529,7 @@
             </button>
           </div>
 
-          <!-- Bloco 1: Medicamentos -->
+          
           <div class="cat-group-card" id="cat-group-medicamentos">
             <div class="cat-group-header">
               <h3 class="cat-group-name">Medicamentos</h3>
@@ -569,7 +569,7 @@
             </button>
           </div>
 
-          <!-- Bloco 2: Higiene pessoal -->
+          
           <div class="cat-group-card" id="cat-group-higiene">
             <div class="cat-group-header">
               <h3 class="cat-group-name">Higiene pessoal</h3>
@@ -605,7 +605,7 @@
             </button>
           </div>
 
-          <!-- Bloco 3: Cuidados com a pele -->
+          
           <div class="cat-group-card" id="cat-group-pele">
             <div class="cat-group-header">
               <h3 class="cat-group-name">Cuidados com a pele</h3>
@@ -641,7 +641,7 @@
             </button>
           </div>
 
-          <!-- Bloco 4: Saúde bucal -->
+          
           <div class="cat-group-card" id="cat-group-bucal">
             <div class="cat-group-header">
               <h3 class="cat-group-name">Saúde bucal</h3>
@@ -677,7 +677,7 @@
             </button>
           </div>
 
-          <!-- Bloco 5: Mamães e bebês -->
+          
           <div class="cat-group-card" id="cat-group-bebes">
             <div class="cat-group-header">
               <h3 class="cat-group-name">Mamães e bebês</h3>
@@ -713,7 +713,7 @@
             </button>
           </div>
 
-          <!-- Bloco 6: Vitaminas e bem-estar -->
+          
           <div class="cat-group-card" id="cat-group-vitaminas">
             <div class="cat-group-header">
               <h3 class="cat-group-name">Vitaminas e bem-estar</h3>
@@ -754,7 +754,7 @@
       </div>
     </section>
 
-    <!-- Seção: Precisa de ajuda para comprar? (Assistente Virtual Acessível) -->
+    
     <section class="section-assistant" id="assistente-ia" aria-labelledby="assistant-title">
       <div class="container assistant-container">
         
@@ -794,7 +794,7 @@
           </p>
         </div>
 
-        <!-- Widget Interativo do Chat -->
+        
         <div class="assistant-widget-box" role="region" aria-label="Janela interativa do Assistente Pague Menos">
           <div class="chat-header">
             <div class="chat-avatar" aria-hidden="true">
@@ -856,7 +856,7 @@
 
   </main>
 
-  <!-- Rodapé Institucional Completo -->
+  
   <footer class="main-footer" role="contentinfo">
     <div class="container footer-container">
       
@@ -907,11 +907,9 @@
     </div>
   </footer>
 
-  <!-- =======================================================================
-       Modais e Gavetas Interativas (Acessibilidade, Login D37, Carrinho D33)
-       ======================================================================= -->
+  
 
-  <!-- 1. Modal / Diálogo da Central de Acessibilidade Completa -->
+  
   <dialog id="modal-acessibilidade" class="accessibility-dialog" aria-labelledby="modal-a11y-title">
     <div class="dialog-content">
       <div class="dialog-header">
@@ -956,7 +954,7 @@
     </div>
   </dialog>
 
-  <!-- 2. Modal de Acesso à Conta / Visitante (D37 / D44) -->
+  
   <dialog id="modal-auth" class="auth-dialog" aria-labelledby="modal-auth-title">
     <div class="dialog-content">
       <div class="dialog-header">
@@ -972,7 +970,7 @@
           <span>ou</span>
         </div>
 
-        <!-- Conforme especificação D37 -> D44: Continuar como visitante -->
+        
         <button type="button" class="btn btn-outline-primary btn-block" onclick="entrarComoVisitante()">
           Continuar como visitante
         </button>
@@ -980,7 +978,7 @@
     </div>
   </dialog>
 
-  <!-- 3. Gaveta / Modal do Carrinho de Compras (D33 Carrinho e Entrega) -->
+  
   <dialog id="modal-carrinho" class="cart-dialog" aria-labelledby="modal-cart-title">
     <div class="dialog-content">
       <div class="dialog-header">
@@ -992,7 +990,7 @@
       </div>
 
       <div class="dialog-body cart-body" id="cart-items-container">
-        <!-- Renderizado dinamicamente pelo script.js -->
+        
       </div>
 
       <div class="dialog-footer cart-footer">
@@ -1022,7 +1020,7 @@
     </div>
   </dialog>
 
-  <!-- 4. Modal de Informações Oficiais do Produto (D32) -->
+  
   <dialog id="modal-produto-detalhe" class="product-detail-dialog" aria-labelledby="modal-prod-title">
     <div class="dialog-content">
       <div class="dialog-header">
@@ -1030,12 +1028,12 @@
         <button type="button" class="btn-close-dialog" onclick="fecharModalProduto()" aria-label="Fechar detalhes do produto">✕</button>
       </div>
       <div class="dialog-body" id="modal-prod-body">
-        <!-- Preenchido dinamicamente via script.js -->
+        
       </div>
     </div>
   </dialog>
 
-  <!-- 5. Modal / Diálogo de Alteração de CEP (D45) -->
+  
   <dialog id="modal-cep" class="cep-dialog" aria-labelledby="modal-cep-title">
     <div class="dialog-content">
       <div class="dialog-header">
@@ -1054,7 +1052,7 @@
     </div>
   </dialog>
 
-  <!-- 6. Card / Diálogo de Pagamento Guiado pela Assistente de IA (Checkout F04 / D39 / D40) -->
+  
   <dialog id="modal-checkout-ia" class="checkout-dialog" aria-labelledby="modal-checkout-title">
     <div class="dialog-content">
       <div class="dialog-header">
@@ -1074,7 +1072,7 @@
           <button type="button" class="btn btn-secondary" onclick="PMChat.open()">Usar chat de compra guiada</button>
         </div>
         
-        <!-- Balão de Orientação da Assistente de IA -->
+        
         <div class="ai-checkout-guidance" role="region" aria-label="Orientação da Assistente de IA para Pagamento">
           <div class="ai-speech-bubble">
             <p id="ai-checkout-speech">
@@ -1088,20 +1086,20 @@
           </div>
         </div>
 
-        <!-- Seção 1: Resumo dos Produtos no Carrinho -->
+        
         <div class="checkout-section">
           <h3 class="checkout-sec-title">1. Produtos Selecionados no Carrinho</h3>
           <div class="checkout-items-list" id="checkout-items-list-container">
-            <!-- Gerado dinamicamente pelo script.js -->
+            
           </div>
         </div>
 
-        <!-- Seção 2: Escolha da Forma de Pagamento -->
+        
         <div class="checkout-section">
           <h3 class="checkout-sec-title">2. Escolha como Deseja Pagar</h3>
           <div class="payment-methods-grid" role="radiogroup" aria-label="Formas de pagamento disponíveis">
             
-            <!-- Opção Pix -->
+            
             <label class="payment-card-opt" for="pay-pix">
               <input type="radio" id="pay-pix" name="payment-method" value="pix" checked onchange="trocarFormaPagamento('pix')">
               <div class="payment-card-content">
@@ -1113,7 +1111,7 @@
               </div>
             </label>
 
-            <!-- Opção Cartão de Crédito -->
+            
             <label class="payment-card-opt" for="pay-card">
               <input type="radio" id="pay-card" name="payment-method" value="card" onchange="trocarFormaPagamento('card')">
               <div class="payment-card-content">
@@ -1125,7 +1123,7 @@
               </div>
             </label>
 
-            <!-- Opção Boleto -->
+            
             <label class="payment-card-opt" for="pay-boleto">
               <input type="radio" id="pay-boleto" name="payment-method" value="boleto" onchange="trocarFormaPagamento('boleto')">
               <div class="payment-card-content">
@@ -1136,7 +1134,7 @@
               </div>
             </label>
 
-            <!-- Opção Convênio Farmácia / PBM -->
+            
             <label class="payment-card-opt" for="pay-pbm">
               <input type="radio" id="pay-pbm" name="payment-method" value="pbm" onchange="trocarFormaPagamento('pbm')">
               <div class="payment-card-content">
@@ -1150,13 +1148,13 @@
 
           </div>
 
-          <!-- Detalhe Dinâmico da Forma de Pagamento Selecionada -->
+          
           <div class="payment-method-details" id="payment-details-view">
-            <!-- Renderizado dinamicamente (Pix QR code, campos de cartão, etc.) -->
+            
           </div>
         </div>
 
-        <!-- Seção 3: Total e Confirmação -->
+        
         <div class="checkout-total-box">
           <div class="total-summary-line">
             <span>Subtotal dos produtos:</span>
@@ -1185,7 +1183,7 @@
     </div>
   </dialog>
 
-  <!-- 7. Modal de Confirmação Simulada de Pedido (D40) -->
+  
   <dialog id="modal-sucesso-pedido" class="success-dialog" aria-labelledby="modal-sucesso-title">
     <div class="dialog-content" style="text-align: center; padding: 36px 24px;">
       <div class="success-check-icon" aria-hidden="true">✓</div>
@@ -1207,7 +1205,7 @@
     </div>
   </dialog>
 
-  <!-- Toast de Notificação de Acessibilidade e Carrinho -->
+  
   <div id="toast-notification" class="toast" aria-hidden="true"></div>
 
   <script src="privacy.js"></script>
