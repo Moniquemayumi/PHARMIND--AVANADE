@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pague Menos Acessível - Experiência farmacêutica inclusiva com leitura facilitada, alto contraste na paleta da marca, navegação guiada e IA opcional.">
+  <title>Pague Menos Acessível | Sua saúde. Seu jeito de comprar.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="accessible-flows.css">
+</head>
+<body>
+  <!-- Link de atalho acessível para saltar para o conteúdo principal (WCAG 2.2) -->
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Faixa de anúncios acessíveis e status via aria-live -->
+  <div id="status-acessibilidade" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Barra de Notificação Superior (Top Utility Bar) -->
+  <div class="top-bar" role="region" aria-label="Avisos e links rápidos">
+    <div class="container top-bar-content">
+      <div class="top-bar-notice">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/>
+          <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+        <span>Frete grátis em compras acima de R$ 99 · Retire na loja</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="https://www.paguemenos.com.br/nossas-lojas" class="top-link">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Nossas lojas</span>
+        </a>
+        <span class="divider" aria-hidden="true">·</span>
+        <a href="ajuda.html" class="top-link">Central de ajuda</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho Principal -->
+  <header class="main-header" role="banner">
+    <div class="container header-container">
+      <!-- Marca / Logo Oficial da Pague Menos (Sem fundo azul) -->
+      <a href="#" class="brand-logo" onclick="resetarFiltroHome(event)" aria-label="Pague Menos Acessível - Voltar ao início da página">
+        <img src="assets/logo-pague-menos.png" alt="Pague Menos" class="brand-img">
+        <div class="brand-text">
+          <span class="brand-name">Pague Menos</span>
+          <span class="brand-sub">Acessível</span>
+        </div>
+      </a>
+
+      <!-- Seletor de CEP (D44 / D45) -->
+      <button class="btn-location" id="btn-cep" onclick="abrirModalCep()" aria-label="Definir CEP de entrega">
+        <div class="location-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="location-info">
+          <span class="location-label">Entregar em</span>
+          <span class="location-value" id="cep-display">Informe seu CEP</span>
+        </div>
+        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+
+      <!-- Barra de Pesquisa com Busca por Voz -->
+      <form class="search-form" role="search" id="form-busca" onsubmit="event.preventDefault(); buscarProduto();">
+        <label for="campo-busca" class="sr-only">Pesquisar remédios, cosméticos ou itens de saúde</label>
+        <div class="search-input-wrapper">
+          <input 
+            type="search" 
+            id="campo-busca" 
+            class="search-input" 
+            placeholder="O que você procura?" 
+            autocomplete="off"
+          />
+          <button 
+            type="button" 
+            class="btn-voice-search" 
+            id="btn-voice" 
+            title="Buscar por comando de voz" 
+            aria-label="Ativar pesquisa por voz"
+            onclick="ativarBuscaPorVoz('campo-busca')"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+        </div>
+        <button type="submit" class="btn-search">
+          Buscar
+        </button>
+      </form>
+
+      <!-- Ações do Header -->
+      <div class="header-actions">
+        <!-- Atalho Rápido para a Assistente de IA -->
+        <button class="action-btn btn-ai-quick-shortcut" onclick="focarAssistenteIA()" aria-label="Abrir assistente de IA com voz e texto">
+          <span class="ai-sparkle-icon" aria-hidden="true">✦</span>
+          <span>Falar com a IA</span>
+        </button>
+
+        <!-- Botão Acessibilidade com Dropdown -->
+        <button class="action-btn action-accessibility" id="btn-accessibility-quick" onclick="abrirPainelAcessibilidade()" aria-haspopup="dialog" aria-expanded="false" aria-label="Abrir central de recursos de acessibilidade">
+          <div class="action-icon-circle">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <circle cx="12" cy="4" r="2"/>
+              <path d="M19 13v-2c-1.54.02-3.09-.75-4.07-1.83l-1.29-1.43c-.4-.44-1.04-.74-1.64-.74-.6 0-1.24.3-1.64.74L9.07 9.17C8.09 10.25 6.54 11.02 5 11v2c1.86-.02 3.63-.9 4.79-2.18L11 9.6V15l-3.3 6.6c-.34.68-.07 1.5.61 1.84.68.34 1.5.07 1.84-.61L12 18.9l1.85 3.93c.34.68 1.16.95 1.84.61.68-.34.95-1.16.61-1.84L13 15V9.6l1.21 1.22C15.37 12.1 17.14 12.98 19 13z"/>
+            </svg>
+          </div>
+          <span>Acessibilidade</span>
+        </button>
+
+        <!-- Botão Entrar / Sessão de Visitante (D37 / D44) -->
+        <button class="action-btn" id="btn-user-auth" onclick="abrirModalAuth()" aria-label="Acessar sua conta ou gerenciar sessão de visitante">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span id="user-display-name">Olá, visitante</span>
+        </button>
+
+        <!-- Botão Carrinho (D33) -->
+        <button class="action-btn btn-cart" id="btn-cart" onclick="abrirGavetaCarrinho()" aria-label="Visualizar carrinho de compras">
+          <div class="cart-icon-wrapper">
+            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <span class="cart-badge" id="cart-count">2</span>
+          </div>
+          <span>Carrinho</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Barra de Navegação / Categorias (CAT-01: Filtragem Reativa na mesma Home) -->
+  <nav class="nav-categories" aria-label="Navegação por categorias e ofertas">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <button class="btn-all-categories" id="btn-all-categories" onclick="selecionarCategoria('todas')" aria-label="Exibir todas as categorias na Home">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <span>Todas as categorias</span>
+        </button>
+
+        <ul class="nav-links">
+          <li>
+            <button type="button" class="nav-btn-link" onclick="selecionarCategoria('medicamentos')" data-cat="medicamentos">Medicamentos</button>
+          </li>
+          <li>
+            <button type="button" class="nav-btn-link" onclick="selecionarCategoria('higiene')" data-cat="higiene">Higiene pessoal</button>
+          </li>
+          <li>
+            <button type="button" class="nav-btn-link" onclick="selecionarCategoria('pele')" data-cat="pele">Cuidados com a pele</button>
+          </li>
+          <li>
+            <button type="button" class="nav-btn-link" onclick="selecionarCategoria('bucal')" data-cat="bucal">Saúde bucal</button>
+          </li>
+          <li>
+            <button type="button" class="nav-btn-link" onclick="selecionarCategoria('bebes')" data-cat="bebes">Mamães e bebês</button>
+          </li>
+          <li>
+            <button type="button" class="nav-btn-link" onclick="selecionarCategoria('vitaminas')" data-cat="vitaminas">Vitaminas</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <button type="button" class="nav-item-highlight" onclick="filtrarOfertas()">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="19" y1="5" x2="5" y2="19"></line>
+            <circle cx="6.5" cy="6.5" r="2.5"></circle>
+            <circle cx="17.5" cy="17.5" r="2.5"></circle>
+          </svg>
+          <span>Ofertas</span>
+        </button>
+        <button type="button" class="nav-btn-link" onclick="mostrarModalProgramaDesconto()">Programa de desconto</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" tabindex="-1">
+    
+    <!-- Card de Boas-Vindas e Instruções para Pessoas Novas (T01 / T02) -->
+    <section class="container welcome-section" id="welcome-card-box" aria-labelledby="welcome-title">
+      <div class="welcome-card" role="region">
+        <div class="welcome-header">
+          <div class="welcome-title-wrap">
+            <span class="welcome-badge">Primeira vez aqui?</span>
+            <h2 id="welcome-title" class="welcome-title">Bem-vinda(o) à Pague Menos Acessível! 🌟</h2>
+          </div>
+          <button type="button" class="btn-close-welcome" onclick="fecharCardBoasVindas()" aria-label="Fechar instruções de boas-vindas">✕</button>
+        </div>
+
+        <p class="welcome-desc">
+          Preparamos uma experiência simples e acolhedora para você encontrar seus remédios e produtos de cuidado com total autonomia. Veja como aproveitar:
+        </p>
+
+        <div class="welcome-steps-grid">
+          <div class="welcome-step-item">
+            <div class="step-num-icon" aria-hidden="true">1</div>
+            <div class="step-content">
+              <h3 class="step-title">Ajuste sua leitura</h3>
+              <p class="step-text">Use os botões de <strong>A− e A+</strong> ou ative o <strong>Alto Contraste</strong> no banner para deixar tudo confortável para sua visão.</p>
+            </div>
+          </div>
+
+          <div class="welcome-step-item">
+            <div class="step-num-icon" aria-hidden="true">2</div>
+            <div class="step-content">
+              <h3 class="step-title">Navegue sem sair da tela</h3>
+              <p class="step-text">Clique em qualquer categoria e veja os produtos surgirem imediatamente na mesma página, sem recarregamentos confusos.</p>
+            </div>
+          </div>
+
+          <div class="welcome-step-item">
+            <div class="step-num-icon" aria-hidden="true">3</div>
+            <div class="step-content">
+              <h3 class="step-title">IA do início ao pagamento</h3>
+              <p class="step-text">Nossa Assistente de IA acompanha você em cada etapa: tira dúvidas, adiciona ao carrinho e te orienta no pagamento seguro.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="welcome-footer">
+          <button type="button" class="btn btn-primary" onclick="fecharCardBoasVindas()">
+            Entendi, começar minhas compras!
+          </button>
+          <button type="button" class="link-arrow" onclick="abrirPainelAcessibilidade()">
+            Configurar acessibilidade agora →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero Banner Inclusivo com Ajustes Imediatos -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="container hero-container">
+        
+        <!-- Coluna da Mensagem -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <span>Acessível para todas as pessoas</span>
+          </div>
+
+          <h1 id="hero-title" class="hero-title">
+            Sua saúde.<br>
+            Seu jeito de comprar.
+          </h1>
+
+          <p class="hero-description">
+            Navegação simples, ajuda por voz ou texto e ajustes de leitura e contraste, do seu jeito em cada etapa da compra.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary-light" id="btn-personalizar" onclick="abrirPainelAcessibilidade()">
+              Personalizar minha experiência
+            </button>
+            <button class="btn btn-ai-hero-btn" onclick="focarAssistenteIA()">
+              ✦ Falar com a IA agora
+            </button>
+            <a href="#destaques" class="btn btn-outline-light">
+              Explorar produtos
+            </a>
+          </div>
+        </div>
+
+        <!-- Coluna do Widget Rápido de Acessibilidade -->
+        <div class="hero-widget-card" role="region" aria-labelledby="widget-acessibilidade-titulo">
+          <div class="widget-header">
+            <h2 id="widget-acessibilidade-titulo" class="widget-title">Acessibilidade que acompanha você</h2>
+            <p class="widget-subtitle">Ajuste agora e mude quando quiser.</p>
+          </div>
+
+          <div class="widget-controls">
+            <!-- Controle 1: Tamanho da Fonte -->
+            <div class="control-row">
+              <span class="control-label" id="label-fonte">Tamanho do texto</span>
+              <div class="btn-group-font" role="group" aria-labelledby="label-fonte">
+                <button type="button" class="btn-font-step" id="btn-font-dec" onclick="ajustarEscalaFonte(-1)" aria-label="Diminuir tamanho da fonte">A−</button>
+                <button type="button" class="btn-font-step" id="btn-font-inc" onclick="ajustarEscalaFonte(1)" aria-label="Aumentar tamanho da fonte">A+</button>
+              </div>
+            </div>
+
+            <!-- Controle 2: Alto Contraste (Paleta Pague Menos Acessível) -->
+            <div class="control-row">
+              <span class="control-label" id="label-contraste">Alto contraste</span>
+              <label for="toggle-contraste" class="switch-wrapper" aria-labelledby="label-contraste">
+                <input type="checkbox" id="toggle-contraste" class="toggle-switch">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+
+            <!-- Controle 3: Leitura Simplificada (Lexend + Entrelinhas) -->
+            <div class="control-row">
+              <span class="control-label" id="label-leitura">Leitura simplificada</span>
+              <label for="toggle-leitura" class="switch-wrapper" aria-labelledby="label-leitura">
+                <input type="checkbox" id="toggle-leitura" class="toggle-switch" checked>
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="widget-footer">
+            <button type="button" class="link-arrow" onclick="abrirPainelAcessibilidade()">
+              Ver todas as opções de acessibilidade
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Barra de Vantagens e Recursos (4 Cards) -->
+    <section class="section-features" aria-label="Diferenciais e serviços acessíveis">
+      <div class="container features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h3 class="feature-title">Entrega rápida</h3>
+            <p class="feature-desc">Acompanhe o pedido em tempo real</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h3 class="feature-title">Retire na loja</h3>
+            <p class="feature-desc">Escolha a unidade mais perto de você</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="5" x2="5" y2="19"></line>
+              <circle cx="6.5" cy="6.5" r="2.5"></circle>
+              <circle cx="17.5" cy="17.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h3 class="feature-title">Programa de desconto</h3>
+            <p class="feature-desc">Preços especiais para quem se cadastra</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h3 class="feature-title">Ajuda por voz ou texto</h3>
+            <p class="feature-desc">Atendimento acessível em toda a compra</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore por Categoria (Dispara filtragem reativa sem sair da tela - CAT-01) -->
+    <section class="section-categories" aria-labelledby="cat-section-title">
+      <div class="container">
+        <div class="section-header-flex">
+          <h2 id="cat-section-title" class="section-heading">Explore por categoria</h2>
+          <button type="button" class="link-arrow" onclick="selecionarCategoria('todas')">
+            Ver todas
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="categories-grid" role="group" aria-label="Selecione uma categoria para filtrar na Home">
+          
+          <!-- Card Medicamentos -->
+          <button type="button" class="category-card" onclick="selecionarCategoria('medicamentos')" aria-label="Filtrar por Medicamentos">
+            <div class="category-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.5 13.5l3-3m-6.5 6.5a4.95 4.95 0 0 1-1.4-3.5 4.95 4.95 0 0 1 1.4-3.5l5.5-5.5a4.95 4.95 0 0 1 7 7l-5.5 5.5a4.95 4.95 0 0 1-3.5 1.4 4.95 4.95 0 0 1-3.5-1.4z"/>
+              </svg>
+            </div>
+            <span class="category-name">Medicamentos</span>
+          </button>
+
+          <!-- Card Higiene pessoal -->
+          <button type="button" class="category-card" onclick="selecionarCategoria('higiene')" aria-label="Filtrar por Higiene pessoal">
+            <div class="category-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              </svg>
+            </div>
+            <span class="category-name">Higiene pessoal</span>
+          </button>
+
+          <!-- Card Cuidados com a pele -->
+          <button type="button" class="category-card" onclick="selecionarCategoria('pele')" aria-label="Filtrar por Cuidados com a pele">
+            <div class="category-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </div>
+            <span class="category-name">Cuidados com a pele</span>
+          </button>
+
+          <!-- Card Saúde bucal -->
+          <button type="button" class="category-card" onclick="selecionarCategoria('bucal')" aria-label="Filtrar por Saúde bucal">
+            <div class="category-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              </svg>
+            </div>
+            <span class="category-name">Saúde bucal</span>
+          </button>
+
+          <!-- Card Mamães e bebês -->
+          <button type="button" class="category-card" onclick="selecionarCategoria('bebes')" aria-label="Filtrar por Mamães e bebês">
+            <div class="category-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M10 15c.5.5 1.2.8 2 .8s1.5-.3 2-.8"/>
+                <circle cx="9" cy="10" r="1"/>
+                <circle cx="15" cy="10" r="1"/>
+                <path d="M12 3a2 2 0 0 1 2 2"/>
+              </svg>
+            </div>
+            <span class="category-name">Mamães e bebês</span>
+          </button>
+
+          <!-- Card Vitaminas e bem-estar -->
+          <button type="button" class="category-card" onclick="selecionarCategoria('vitaminas')" aria-label="Filtrar por Vitaminas e bem-estar">
+            <div class="category-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <span class="category-name">Vitaminas e bem-estar</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vitrine de Produtos Reativa na Home (CAT-01 / CAT-04) -->
+    <section class="section-products" id="destaques" aria-labelledby="products-section-title">
+      <div class="container">
+        <div class="section-header-flex">
+          <div>
+            <h2 id="products-section-title" class="section-heading">Produtos em destaque</h2>
+            <p id="products-active-filter-label" class="section-subheading">Exibindo os itens mais procurados</p>
+          </div>
+          <button type="button" class="link-arrow" onclick="selecionarCategoria('todas')">
+            Ver todos
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Grid de Produtos Renderizado Dinamicamente -->
+        <div class="products-grid" id="products-grid-container" aria-live="polite">
+          <!-- Conteúdo gerado reativamente por script.js com base nos produtos oficiais -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore Produtos por Categoria (Catálogo Estruturado com Auxílio de IA - D43) -->
+    <section class="section-category-catalog" id="catalogo" aria-labelledby="cat-catalog-title">
+      <div class="container">
+        
+        <div class="catalog-card-container">
+          <div class="catalog-header">
+            <div>
+              <h2 id="cat-catalog-title" class="catalog-title">Explore produtos por categoria</h2>
+              <p class="catalog-subtitle">Escolha uma categoria para encontrar os produtos que procura.</p>
+            </div>
+            <button type="button" class="link-arrow" onclick="selecionarCategoria('todas')">
+              Ver catálogo completo
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Bloco 1: Medicamentos -->
+          <div class="cat-group-card" id="cat-group-medicamentos">
+            <div class="cat-group-header">
+              <h3 class="cat-group-name">Medicamentos</h3>
+              <button type="button" class="link-ai-sparkle" onclick="abrirChatbotComMensagem('Tenho dúvidas sobre Medicamentos')">
+                <span aria-hidden="true">✦</span> Dúvidas? Conversar com a IA →
+              </button>
+            </div>
+
+            <div class="cat-items-grid">
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Analgésico isento de prescrição (exemplo)</h4>
+                  <p class="cat-item-price">R$ 8,90 · Preço ilustrativo</p>
+                </div>
+                <div class="cat-item-actions">
+                  <button type="button" class="btn-text-link" onclick="abrirDetalheProduto('Analgésico isento de prescrição (exemplo)')">Ver detalhes →</button>
+                  <button type="button" class="btn-text-link" onclick="abrirChatbotComMensagem('Informações sobre Analgésico isento de prescrição')">Consultar com IA →</button>
+                </div>
+              </div>
+
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Antitérmico isento de prescrição (exemplo)</h4>
+                  <p class="cat-item-price">R$ 11,90 · Preço ilustrativo</p>
+                </div>
+                <div class="cat-item-actions">
+                  <button type="button" class="btn-text-link" onclick="abrirDetalheProduto('Antitérmico isento de prescrição (exemplo)')">Ver detalhes →</button>
+                  <button type="button" class="btn-text-link" onclick="abrirChatbotComMensagem('Informações sobre Antitérmico isento de prescrição')">Consultar com IA →</button>
+                </div>
+              </div>
+            </div>
+
+            <p class="cat-disclaimer">Confira bula e regras de receita. A IA auxilia a navegação, não faz prescrições.</p>
+
+            <button type="button" class="btn-back-to-categories" onclick="selecionarCategoria('todas')">
+              ↑ Voltar às categorias
+            </button>
+          </div>
+
+          <!-- Bloco 2: Higiene pessoal -->
+          <div class="cat-group-card" id="cat-group-higiene">
+            <div class="cat-group-header">
+              <h3 class="cat-group-name">Higiene pessoal</h3>
+              <button type="button" class="link-ai-sparkle" onclick="abrirChatbotComMensagem('Tenho dúvidas sobre Higiene pessoal')">
+                <span aria-hidden="true">✦</span> Dúvidas? Conversar com a IA →
+              </button>
+            </div>
+
+            <div class="cat-items-grid">
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Sabonete suave 90 g</h4>
+                  <p class="cat-item-price">R$ 4,49 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirDetalheProduto('Sabonete suave 90 g')">
+                  Ver detalhes →
+                </button>
+              </div>
+
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Sabonete líquido suave (exemplo)</h4>
+                  <p class="cat-item-price">R$ 15,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirChatbotComMensagem('Informações sobre Sabonete líquido suave')">
+                  Consultar informações com IA →
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn-back-to-categories" onclick="selecionarCategoria('todas')">
+              ↑ Voltar às categorias
+            </button>
+          </div>
+
+          <!-- Bloco 3: Cuidados com a pele -->
+          <div class="cat-group-card" id="cat-group-pele">
+            <div class="cat-group-header">
+              <h3 class="cat-group-name">Cuidados com a pele</h3>
+              <button type="button" class="link-ai-sparkle" onclick="abrirChatbotComMensagem('Tenho dúvidas sobre Cuidados com a pele')">
+                <span aria-hidden="true">✦</span> Dúvidas? Conversar com a IA →
+              </button>
+            </div>
+
+            <div class="cat-items-grid">
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Hidratante corporal 200 ml</h4>
+                  <p class="cat-item-price">R$ 24,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirDetalheProduto('Hidratante corporal 200 ml')">
+                  Ver detalhes →
+                </button>
+              </div>
+
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Protetor labial FPS 30</h4>
+                  <p class="cat-item-price">R$ 12,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirDetalheProduto('Protetor labial FPS 30')">
+                  Ver detalhes →
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn-back-to-categories" onclick="selecionarCategoria('todas')">
+              ↑ Voltar às categorias
+            </button>
+          </div>
+
+          <!-- Bloco 4: Saúde bucal -->
+          <div class="cat-group-card" id="cat-group-bucal">
+            <div class="cat-group-header">
+              <h3 class="cat-group-name">Saúde bucal</h3>
+              <button type="button" class="link-ai-sparkle" onclick="abrirChatbotComMensagem('Tenho dúvidas sobre Saúde bucal')">
+                <span aria-hidden="true">✦</span> Dúvidas? Conversar com a IA →
+              </button>
+            </div>
+
+            <div class="cat-items-grid">
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Escova dental macia</h4>
+                  <p class="cat-item-price">R$ 8,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirDetalheProduto('Escova dental macia')">
+                  Ver detalhes →
+                </button>
+              </div>
+
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Creme dental (exemplo)</h4>
+                  <p class="cat-item-price">R$ 7,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirChatbotComMensagem('Informações sobre Creme dental')">
+                  Consultar informações com IA →
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn-back-to-categories" onclick="selecionarCategoria('todas')">
+              ↑ Voltar às categorias
+            </button>
+          </div>
+
+          <!-- Bloco 5: Mamães e bebês -->
+          <div class="cat-group-card" id="cat-group-bebes">
+            <div class="cat-group-header">
+              <h3 class="cat-group-name">Mamães e bebês</h3>
+              <button type="button" class="link-ai-sparkle" onclick="abrirChatbotComMensagem('Tenho dúvidas sobre itens de Mamães e bebês')">
+                <span aria-hidden="true">✦</span> Dúvidas? Conversar com a IA →
+              </button>
+            </div>
+
+            <div class="cat-items-grid">
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Toalhas umedecidas (exemplo)</h4>
+                  <p class="cat-item-price">R$ 13,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirChatbotComMensagem('Informações sobre Toalhas umedecidas')">
+                  Consultar informações com IA →
+                </button>
+              </div>
+
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Fraldas — pacote (exemplo)</h4>
+                  <p class="cat-item-price">R$ 34,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirChatbotComMensagem('Informações sobre Fraldas')">
+                  Consultar informações com IA →
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn-back-to-categories" onclick="selecionarCategoria('todas')">
+              ↑ Voltar às categorias
+            </button>
+          </div>
+
+          <!-- Bloco 6: Vitaminas e bem-estar -->
+          <div class="cat-group-card" id="cat-group-vitaminas">
+            <div class="cat-group-header">
+              <h3 class="cat-group-name">Vitaminas e bem-estar</h3>
+              <button type="button" class="link-ai-sparkle" onclick="abrirChatbotComMensagem('Tenho dúvidas sobre Vitaminas e suplementos')">
+                <span aria-hidden="true">✦</span> Dúvidas? Conversar com a IA →
+              </button>
+            </div>
+
+            <div class="cat-items-grid">
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Vitamina C (exemplo)</h4>
+                  <p class="cat-item-price">R$ 16,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirChatbotComMensagem('Informações sobre Vitamina C')">
+                  Consultar informações com IA →
+                </button>
+              </div>
+
+              <div class="cat-product-item">
+                <div class="cat-product-info">
+                  <h4 class="cat-item-title">Multivitamínico (exemplo)</h4>
+                  <p class="cat-item-price">R$ 29,90 · Preço ilustrativo</p>
+                </div>
+                <button type="button" class="btn-text-link" onclick="abrirChatbotComMensagem('Informações sobre Multivitamínico')">
+                  Consultar informações com IA →
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn-back-to-categories" onclick="selecionarCategoria('todas')">
+              ↑ Voltar às categorias
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Seção: Precisa de ajuda para comprar? (Assistente Virtual Acessível) -->
+    <section class="section-assistant" id="assistente-ia" aria-labelledby="assistant-title">
+      <div class="container assistant-container">
+        
+        <div class="assistant-content">
+          <h2 id="assistant-title" class="assistant-title">Precisa de ajuda para comprar?</h2>
+          
+          <p class="assistant-desc">
+            Converse por voz ou texto. O assistente ajuda a buscar produtos e explica cada etapa, e você continua no controle.
+          </p>
+
+          <div class="quick-chips" role="group" aria-label="Sugestões de tópicos para ajuda rápida da IA">
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Pesquisar produtos na Pague Menos')">Pesquisar produtos</button>
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Entender bula e modo de usar')">Entender informações e bula</button>
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Revisar os itens do meu carrinho')">Revisar meu carrinho</button>
+            <button type="button" class="chip-item" onclick="iniciarCheckoutGuiadoIA()">Ir para o pagamento guiado 💳</button>
+          </div>
+
+          <div class="assistant-actions">
+            <button type="button" class="btn btn-primary" onclick="PMChat.open()">Comprar pelo chat · texto ou voz</button>
+            <button class="btn btn-primary" onclick="focarChatInput()">
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Conversar com a assistente</span>
+            </button>
+            <button type="button" class="link-arrow" onclick="iniciarCheckoutGuiadoIA()">
+              Abrir pagamento guiado
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <p class="assistant-disclaimer">
+            A Assistente de IA acompanha você em todas as etapas, desde a escolha dos produtos até a revisão e confirmação do pagamento.
+          </p>
+        </div>
+
+        <!-- Widget Interativo do Chat -->
+        <div class="assistant-widget-box" role="region" aria-label="Janela interativa do Assistente Pague Menos">
+          <div class="chat-header">
+            <div class="chat-avatar" aria-hidden="true">
+              <span>P</span>
+            </div>
+            <div class="chat-header-info">
+              <span class="chat-title">Assistente Pague Menos</span>
+              <span class="chat-sub">Acompanhamento completo · da pré-compra ao pagamento</span>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chat-messages-container" aria-live="polite">
+            <div class="chat-bubble bot-bubble">
+              <p>Olá! Sou sua assistente. Vou te acompanhar na busca de produtos, tirar dúvidas de bulas e guiar seu pagamento com segurança. O que você procura hoje?</p>
+            </div>
+
+
+            <div class="chat-inline-actions">
+              <button type="button" class="btn-chat-action" onclick="enviarMensagemRapida('Ver opções de produtos')">Ver opções</button>
+              <button type="button" class="btn-chat-action" onclick="iniciarCheckoutGuiadoIA()">Ir para o pagamento guiado →</button>
+            </div>
+          </div>
+
+          <form class="chat-input-bar" id="chat-form" onsubmit="event.preventDefault(); enviarMensagemChat();">
+            <label for="chat-input" class="sr-only">Digite sua pergunta para o assistente</label>
+            <input 
+              type="text" 
+              id="chat-input" 
+              class="chat-input-field" 
+              placeholder="Escreva sua mensagem" 
+              autocomplete="off"
+            />
+            <button 
+              type="button" 
+              class="btn-chat-mic" 
+              id="btn-chat-voice" 
+              title="Falar por voz" 
+              aria-label="Gravar mensagem de voz"
+              onclick="ativarBuscaPorVoz('chat-input', true)"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </button>
+            <button type="submit" class="btn-chat-send" aria-label="Enviar mensagem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Institucional Completo -->
+  <footer class="main-footer" role="contentinfo">
+    <div class="container footer-container">
+      
+      <div class="footer-brand-col">
+        <div class="brand-logo footer-logo" aria-label="Pague Menos">
+          <img src="assets/logo-pague-menos.png" alt="Pague Menos" class="brand-img">
+          <div class="brand-text">
+            <span class="brand-name">Pague Menos</span>
+          </div>
+        </div>
+        <p class="footer-slogan">
+          Saúde e cuidado ao seu alcance, do seu jeito.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Institucional</h3>
+        <ul class="footer-links">
+          <li><a href="sobre.html">Sobre a Pague Menos</a></li>
+          <li><a href="https://www.paguemenos.com.br/nossas-lojas">Nossas lojas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Ajuda</h3>
+        <ul class="footer-links">
+          <li><a href="ajuda.html">Central de ajuda</a></li>
+          <li><a href="ajuda.html#card-trocas">Trocas e devoluções</a></li>
+          <li><a href="ajuda.html#assistente-ia">Acompanhar pedido</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Acessibilidade</h3>
+        <ul class="footer-links">
+          <li><button type="button" class="btn-footer-link" onclick="abrirPainelAcessibilidade()">Central de acessibilidade</button></li>
+          <li><button type="button" class="btn-footer-link" onclick="abrirPainelAcessibilidade()">Preferências de leitura</button></li>
+          <li><button type="button" class="btn-footer-link" onclick="mostrarModalDeclaracaoA11y()">Declaração de acessibilidade</button></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-content">
+        <p>© 2026 Pague Menos Acessível</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =======================================================================
+       Modais e Gavetas Interativas (Acessibilidade, Login D37, Carrinho D33)
+       ======================================================================= -->
+
+  <!-- 1. Modal / Diálogo da Central de Acessibilidade Completa -->
+  <dialog id="modal-acessibilidade" class="accessibility-dialog" aria-labelledby="modal-a11y-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 id="modal-a11y-title" class="dialog-title">Central de Acessibilidade</h2>
+        <button type="button" class="btn-close-dialog" onclick="fecharPainelAcessibilidade()" aria-label="Fechar central de acessibilidade">✕</button>
+      </div>
+      <div class="dialog-body">
+        <p class="dialog-intro">Personalize sua experiência mantendo a identidade visual e o contraste ideal para sua visão.</p>
+
+        <div class="dialog-option-block">
+          <h3>Tamanho do Texto</h3>
+          <div class="font-zoom-selector">
+            <button type="button" class="btn-zoom-opt" onclick="ajustarEscalaFonte(-1)">Diminuir (−)</button>
+            <button type="button" class="btn-zoom-opt" onclick="resetarEscalaFonte()">Padrão (100%)</button>
+            <button type="button" class="btn-zoom-opt" onclick="ajustarEscalaFonte(1)">Aumentar (+)</button>
+          </div>
+        </div>
+
+        <div class="dialog-option-block">
+          <h3>Contraste e Cores</h3>
+          <label class="dialog-check-item">
+            <input type="checkbox" id="modal-toggle-contraste" onchange="sincronizarContraste(this.checked)">
+            <span><strong>Alto Contraste Pague Menos</strong> (Fundo azul marinho profundo #13243B com texto marfim #FFF5D6 - WCAG AAA)</span>
+          </label>
+        </div>
+
+        <div class="dialog-option-block">
+          <h3>Formatação de Leitura</h3>
+          <label class="dialog-check-item">
+            <input type="checkbox" id="modal-toggle-leitura" checked onchange="sincronizarLeitura(this.checked)">
+            <span><strong>Leitura Simplificada</strong> (Tipografia Lexend, espaçamento entrelinhas expandido para dislexia e baixa visão)</span>
+          </label>
+          <label class="dialog-check-item">
+            <input type="checkbox" id="modal-toggle-links" onchange="toggleDestacarLinks(this.checked)">
+            <span>Sublinhar e destacar todos os links</span>
+          </label>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-primary" onclick="fecharPainelAcessibilidade()">Aplicar e Fechar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 2. Modal de Acesso à Conta / Visitante (D37 / D44) -->
+  <dialog id="modal-auth" class="auth-dialog" aria-labelledby="modal-auth-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 id="modal-auth-title" class="dialog-title">Acesso à Conta</h2>
+        <button type="button" class="btn-close-dialog" onclick="fecharModalAuth()" aria-label="Fechar janela de login">✕</button>
+      </div>
+      <div class="dialog-body">
+        <p class="dialog-intro">Acesse sua conta para ver pedidos e descontos exclusivos, ou continue navegando com facilidade.</p>
+
+        <a href="login.html" class="btn btn-primary btn-block">Entrar ou criar conta</a>
+
+        <div class="auth-divider">
+          <span>ou</span>
+        </div>
+
+        <!-- Conforme especificação D37 -> D44: Continuar como visitante -->
+        <button type="button" class="btn btn-outline-primary btn-block" onclick="entrarComoVisitante()">
+          Continuar como visitante
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 3. Gaveta / Modal do Carrinho de Compras (D33 Carrinho e Entrega) -->
+  <dialog id="modal-carrinho" class="cart-dialog" aria-labelledby="modal-cart-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <div class="cart-title-wrap">
+          <h2 id="modal-cart-title" class="dialog-title">Seu Carrinho</h2>
+          <span class="badge-item-count" id="cart-drawer-count">0 itens</span>
+        </div>
+        <button type="button" class="btn-close-dialog" onclick="fecharGavetaCarrinho()" aria-label="Fechar carrinho de compras">✕</button>
+      </div>
+
+      <div class="dialog-body cart-body" id="cart-items-container">
+        <!-- Renderizado dinamicamente pelo script.js -->
+      </div>
+
+      <div class="dialog-footer cart-footer">
+        <div id="cart-undo" class="purchase-undo" hidden>
+          <p id="cart-undo-text" role="status" aria-atomic="true"></p>
+          <button type="button" id="cart-undo-button" class="btn btn-secondary" onclick="desfazerRemocaoCarrinho()">Desfazer remoção</button>
+        </div>
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal-val" class="summary-price">R$ 0,00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Frete (Entrega para <span id="cart-cep-label">informe seu CEP</span>)</span>
+          <span class="free-shipping-tag">Grátis (acima de R$ 99) ou R$ 9,90</span>
+        </div>
+        <div class="cart-summary-total">
+          <span>Total estimado</span>
+          <span id="cart-total-val" class="total-price">R$ 0,00</span>
+        </div>
+
+        <div class="cart-actions-row">
+          <button type="button" class="btn btn-secondary" onclick="fecharGavetaCarrinho()">Continuar comprando</button>
+          <button type="button" class="btn btn-secondary" onclick="PMChat.open()">Comprar pelo chat · texto ou voz</button>
+          <button type="button" class="btn btn-primary" onclick="iniciarCheckoutGuiadoIA()">Avançar para pagamento com IA 💳</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 4. Modal de Informações Oficiais do Produto (D32) -->
+  <dialog id="modal-produto-detalhe" class="product-detail-dialog" aria-labelledby="modal-prod-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 id="modal-prod-title" class="dialog-title">Detalhes do Produto</h2>
+        <button type="button" class="btn-close-dialog" onclick="fecharModalProduto()" aria-label="Fechar detalhes do produto">✕</button>
+      </div>
+      <div class="dialog-body" id="modal-prod-body">
+        <!-- Preenchido dinamicamente via script.js -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 5. Modal / Diálogo de Alteração de CEP (D45) -->
+  <dialog id="modal-cep" class="cep-dialog" aria-labelledby="modal-cep-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 id="modal-cep-title" class="dialog-title">Alterar CEP de Entrega</h2>
+        <button type="button" class="btn-close-dialog" onclick="fecharModalCep()" aria-label="Fechar modal de CEP">✕</button>
+      </div>
+      <div class="dialog-body">
+        <p class="dialog-intro">Informe seu CEP para calcularmos prazos e estoque mais próximo com retirada rápida.</p>
+        <div class="cep-input-group">
+          <label for="input-cep-val" class="sr-only">Digite seu CEP</label>
+          <input type="text" id="input-cep-val" class="form-input" inputmode="numeric" autocomplete="postal-code" placeholder="50000-000" maxlength="9" aria-describedby="cep-status">
+          <p id="cep-status" role="status" aria-atomic="true"></p>
+          <button type="button" class="btn btn-primary" onclick="salvarCep()">Salvar CEP</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 6. Card / Diálogo de Pagamento Guiado pela Assistente de IA (Checkout F04 / D39 / D40) -->
+  <dialog id="modal-checkout-ia" class="checkout-dialog" aria-labelledby="modal-checkout-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <div class="cart-title-wrap">
+          <div class="chat-avatar" style="width: 32px; height: 32px; font-size: 0.9rem;" aria-hidden="true">
+            <span>P</span>
+          </div>
+          <h2 id="modal-checkout-title" class="dialog-title">Pagamento Guiado com Assistente de IA</h2>
+        </div>
+        <button type="button" class="btn-close-dialog" onclick="fecharCheckoutGuiadoIA()" aria-label="Fechar tela de pagamento">✕</button>
+      </div>
+
+      <div class="dialog-body checkout-body" id="checkout-content-container">
+        <div class="guided-option">
+          <h3>Prefere conversar durante a compra?</h3>
+          <p>Escolha produtos, confira o total e avance por texto ou voz.</p>
+          <button type="button" class="btn btn-secondary" onclick="PMChat.open()">Usar chat de compra guiada</button>
+        </div>
+        
+        <!-- Balão de Orientação da Assistente de IA -->
+        <div class="ai-checkout-guidance" role="region" aria-label="Orientação da Assistente de IA para Pagamento">
+          <div class="ai-speech-bubble">
+            <p id="ai-checkout-speech">
+              👋 <strong>Olá! Sou a sua Assistente Pague Menos.</strong><br>
+              Confira seu carrinho: <span id="checkout-total-items-badge">0 itens</span>. CEP de entrega: <strong id="checkout-cep-badge">a informar</strong>. Escolha a forma de pagamento abaixo que eu te guio em cada etapa!
+            </p>
+            <button type="button" class="btn-audio-speak" onclick="ouvirOrientacaoIA()" aria-label="Ouvir orientação da assistente por voz">
+              🔊 Ouvir orientação
+            </button>
+            <button type="button" class="btn-audio-speak" onclick="pararLeitura()">Parar leitura</button>
+          </div>
+        </div>
+
+        <!-- Seção 1: Resumo dos Produtos no Carrinho -->
+        <div class="checkout-section">
+          <h3 class="checkout-sec-title">1. Produtos Selecionados no Carrinho</h3>
+          <div class="checkout-items-list" id="checkout-items-list-container">
+            <!-- Gerado dinamicamente pelo script.js -->
+          </div>
+        </div>
+
+        <!-- Seção 2: Escolha da Forma de Pagamento -->
+        <div class="checkout-section">
+          <h3 class="checkout-sec-title">2. Escolha como Deseja Pagar</h3>
+          <div class="payment-methods-grid" role="radiogroup" aria-label="Formas de pagamento disponíveis">
+            
+            <!-- Opção Pix -->
+            <label class="payment-card-opt" for="pay-pix">
+              <input type="radio" id="pay-pix" name="payment-method" value="pix" checked onchange="trocarFormaPagamento('pix')">
+              <div class="payment-card-content">
+                <div class="payment-card-header">
+                  <span class="payment-name">⚡ Pix Acessível</span>
+                  <span class="payment-tag">Aprovação Imediata</span>
+                </div>
+                <p class="payment-desc">Gera código Copia e Cola e QR Code para pagar no app do seu banco com rapidez.</p>
+              </div>
+            </label>
+
+            <!-- Opção Cartão de Crédito -->
+            <label class="payment-card-opt" for="pay-card">
+              <input type="radio" id="pay-card" name="payment-method" value="card" onchange="trocarFormaPagamento('card')">
+              <div class="payment-card-content">
+                <div class="payment-card-header">
+                  <span class="payment-name">💳 Cartão de Crédito</span>
+                  <span class="payment-tag">Em até 6x sem juros</span>
+                </div>
+                <p class="payment-desc">Aceita Visa, Mastercard, Elo e Hipercard com total proteção de dados.</p>
+              </div>
+            </label>
+
+            <!-- Opção Boleto -->
+            <label class="payment-card-opt" for="pay-boleto">
+              <input type="radio" id="pay-boleto" name="payment-method" value="boleto" onchange="trocarFormaPagamento('boleto')">
+              <div class="payment-card-content">
+                <div class="payment-card-header">
+                  <span class="payment-name">📄 Boleto Bancário</span>
+                </div>
+                <p class="payment-desc">Pague na lotérica, banco ou internet banking. Vencimento em 2 dias úteis.</p>
+              </div>
+            </label>
+
+            <!-- Opção Convênio Farmácia / PBM -->
+            <label class="payment-card-opt" for="pay-pbm">
+              <input type="radio" id="pay-pbm" name="payment-method" value="pbm" onchange="trocarFormaPagamento('pbm')">
+              <div class="payment-card-content">
+                <div class="payment-card-header">
+                  <span class="payment-name">🏥 Convênio / Programa de Benefício (PBM)</span>
+                  <span class="payment-tag">Desconto Extra</span>
+                </div>
+                <p class="payment-desc">Utilize seu plano de saúde ou benefício corporativo para descontos adicionais.</p>
+              </div>
+            </label>
+
+          </div>
+
+          <!-- Detalhe Dinâmico da Forma de Pagamento Selecionada -->
+          <div class="payment-method-details" id="payment-details-view">
+            <!-- Renderizado dinamicamente (Pix QR code, campos de cartão, etc.) -->
+          </div>
+        </div>
+
+        <!-- Seção 3: Total e Confirmação -->
+        <div class="checkout-total-box">
+          <div class="total-summary-line">
+            <span>Subtotal dos produtos:</span>
+            <span id="checkout-subtotal-val">R$ 0,00</span>
+          </div>
+          <div class="total-summary-line">
+            <span>Frete para entrega:</span>
+            <span id="checkout-frete-val" class="free-shipping-tag">Grátis</span>
+          </div>
+          <div class="total-summary-line total-highlight">
+            <span>Total a pagar:</span>
+            <span id="checkout-total-val" class="checkout-big-price">R$ 0,00</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary" onclick="fecharCheckoutGuiadoIA()">Voltar ao carrinho</button>
+        <p>Para concluir, você precisa entrar na sua conta.</p>
+        <p id="checkout-order-status" role="status" aria-atomic="true"></p>
+        <button type="button" class="btn btn-primary" onclick="confirmarCompraSimuladaIA()">
+          Confirmar pedido com a assistente
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 7. Modal de Confirmação Simulada de Pedido (D40) -->
+  <dialog id="modal-sucesso-pedido" class="success-dialog" aria-labelledby="modal-sucesso-title">
+    <div class="dialog-content" style="text-align: center; padding: 36px 24px;">
+      <div class="success-check-icon" aria-hidden="true">✓</div>
+      <h2 id="modal-sucesso-title" class="dialog-title" style="margin-top: 14px;">Pedido Concluído com Sucesso! 🎉</h2>
+      <p style="font-size: 1.05rem; margin-top: 8px; color: var(--color-text-main);">
+        Obrigada por comprar na <strong>Pague Menos Acessível</strong>!
+      </p>
+
+      <div class="order-info-card" style="margin: 20px 0; padding: 18px; background-color: var(--color-surface-soft); border: 1.5px solid var(--color-border); border-radius: var(--radius-md); text-align: left;">
+        <p><strong>Número do Pedido:</strong> <span id="success-order-id"></span></p>
+        <p style="margin-top: 6px;"><strong>Previsão de Entrega:</strong> <span id="success-delivery-date"></span></p>
+        <p style="margin-top: 6px;"><strong>Forma de Pagamento:</strong> <span id="success-order-pay-method"></span></p>
+        <p style="margin-top: 6px;"><strong>Acompanhamento:</strong> Consulte as atualizações na área de pedidos.</p>
+      </div>
+
+      <button type="button" class="btn btn-primary" onclick="fecharModalSucessoPedido()">
+        Voltar à Página Inicial
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Toast de Notificação de Acessibilidade e Carrinho -->
+  <div id="toast-notification" class="toast" aria-hidden="true"></div>
+
+  <script src="privacy.js"></script>
+  <script src="script.js"></script>
+  <script src="auth-config.js"></script>
+  <script src="auth.js"></script>
+  <script src="purchase-chat.js"></script>
+  <script src="accessible-help.js"></script>
+</body>
+</html>

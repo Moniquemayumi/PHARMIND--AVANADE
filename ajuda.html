@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Central de Ajuda e Trocas & Devoluções - Pague Menos Acessível. Atendimento guiado por voz ou texto com a Assistente de IA.">
+  <title>Central de Ajuda e Trocas | Pague Menos Acessível</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="accessible-flows.css">
+</head>
+<body>
+  <!-- Link de atalho acessível -->
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+  <div id="status-acessibilidade" class="sr-only" aria-live="polite"></div>
+
+  <!-- Top Bar -->
+  <div class="top-bar" role="region" aria-label="Avisos e links rápidos">
+    <div class="container top-bar-content">
+      <div class="top-bar-notice">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/>
+          <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+        <span>Atendimento Acessível 24h com apoio da Assistente de IA</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="index.html" class="top-link">← Voltar à Loja Principal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header" role="banner">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" aria-label="Pague Menos Acessível - Página inicial">
+        <img src="assets/logo-pague-menos.png" alt="Pague Menos" class="brand-img">
+        <div class="brand-text">
+          <span class="brand-name">Pague Menos</span>
+          <span class="brand-sub">Central de Ajuda & IA</span>
+        </div>
+      </a>
+
+      <!-- Atalho Rápido para IA -->
+      <button class="action-btn btn-ai-quick-shortcut" onclick="focarAssistenteIA()" aria-label="Abrir conversa direta com a IA">
+        <span class="ai-sparkle-icon" aria-hidden="true">✦</span>
+        <span>Perguntar para a IA</span>
+      </button>
+
+      <div class="header-actions">
+        <!-- Controles de Acessibilidade Rápidos -->
+        <div class="btn-group-font" role="group" aria-label="Ajuste de tamanho do texto">
+          <button type="button" class="btn-font-step" onclick="ajustarEscalaFonte(-1)" aria-label="Diminuir texto">A−</button>
+          <button type="button" class="btn-font-step" onclick="ajustarEscalaFonte(1)" aria-label="Aumentar texto">A+</button>
+        </div>
+
+        <button class="action-btn action-accessibility" onclick="abrirPainelAcessibilidade()" aria-label="Abrir opções de acessibilidade">
+          <div class="action-icon-circle">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <circle cx="12" cy="4" r="2"/>
+              <path d="M19 13v-2c-1.54.02-3.09-.75-4.07-1.83l-1.29-1.43c-.4-.44-1.04-.74-1.64-.74-.6 0-1.24.3-1.64.74L9.07 9.17C8.09 10.25 6.54 11.02 5 11v2c1.86-.02 3.63-.9 4.79-2.18L11 9.6V15l-3.3 6.6c-.34.68-.07 1.5.61 1.84.68.34 1.5.07 1.84-.61L12 18.9l1.85 3.93c.34.68 1.16.95 1.84.61.68-.34.95-1.16.61-1.84L13 15V9.6l1.21 1.22C15.37 12.1 17.14 12.98 19 13z"/>
+            </svg>
+          </div>
+          <span>Acessibilidade</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" tabindex="-1">
+    
+    <!-- Hero da Central de Ajuda -->
+    <section class="help-hero">
+      <div class="container help-hero-container">
+        <span class="welcome-badge">Atendimento Inclusivo</span>
+        <h1 class="help-hero-title">Como a Assistente de IA pode te ajudar hoje?</h1>
+        <p class="help-hero-desc">
+          Tire dúvidas sobre prazos de entrega, bulas de remédios, formas de pagamento ou solicite trocas e devoluções guiadas passo a passo.
+        </p>
+
+        <!-- Barra de Busca de Ajuda com Voz -->
+        <div class="help-search-box">
+          <label for="input-ajuda-busca" class="sr-only">Pesquisar tópico de ajuda</label>
+          <input type="search" id="input-ajuda-busca" class="help-search-input" placeholder="Ex: como trocar um produto, prazo de entrega, receita médica..." onkeyup="if(event.key==='Enter') pesquisarAjuda();">
+          <button type="button" class="btn-voice-search" onclick="ativarBuscaPorVoz('input-ajuda-busca')" title="Falar por voz">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+          <button type="button" class="btn btn-primary" onclick="pesquisarAjuda()">Buscar Ajuda</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards de Tópicos Mais Buscados -->
+    <section class="container help-topics-section">
+      <h2 class="section-heading">Tópicos Mais Procurados</h2>
+      <div class="help-cards-grid">
+        
+        <!-- Card 1: Trocas e Devoluções com IA -->
+        <div class="help-topic-card highlight-card" id="card-trocas">
+          <div class="help-topic-icon" aria-hidden="true">🔄</div>
+          <h3 class="help-topic-title">Trocas & Devoluções Guiadas</h3>
+          <p class="help-topic-text">
+            Precisa trocar um item ou desistir da compra? Consulte as orientações e encontre o canal de atendimento para solicitar ajuda.
+          </p>
+          <button type="button" class="btn btn-primary btn-sm" onclick="iniciarFluxoTrocaIA()">
+            Solicitar Troca com IA →
+          </button>
+        </div>
+
+        <!-- Card 2: Entrega e Prazos -->
+        <div class="help-topic-card">
+          <div class="help-topic-icon" aria-hidden="true">🚚</div>
+          <h3 class="help-topic-title">Entregas e Prazos</h3>
+          <p class="help-topic-text">
+            Entregas expressas em até 2 horas na sua região e frete grátis em compras acima de R$ 99. Acompanhe seu pacote em tempo real.
+          </p>
+          <button type="button" class="btn-text-link" onclick="perguntarIA('Como funciona o prazo de entrega expressa da Pague Menos?')">
+            Consultar prazos com a IA →
+          </button>
+        </div>
+
+        <!-- Card 3: Receitas e Medicamentos Controlados -->
+        <div class="help-topic-card">
+          <div class="help-topic-icon" aria-hidden="true">💊</div>
+          <h3 class="help-topic-title">Receitas e Medicamentos</h3>
+          <p class="help-topic-text">
+            Saiba quais medicamentos exigem receita retida, como funciona a receita digital (QR Code) e onde conferir as regras oficiais da Anvisa.
+          </p>
+          <button type="button" class="btn-text-link" onclick="perguntarIA('Quais medicamentos precisam de receita médica?')">
+            Tirar dúvidas de receitas com a IA →
+          </button>
+        </div>
+
+        <!-- Card 4: Formas de Pagamento e Pix -->
+        <div class="help-topic-card">
+          <div class="help-topic-icon" aria-hidden="true">💳</div>
+          <h3 class="help-topic-title">Pagamentos & Descontos</h3>
+          <p class="help-topic-text">
+            Pix com aprovação imediata, cartão de crédito parcelado em até 6x sem juros, boleto e descontos do programa convênio PBM.
+          </p>
+          <button type="button" class="btn-text-link" onclick="perguntarIA('Quais são as formas de pagamento e descontos?')">
+            Ver detalhes de pagamento →
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Seção de Solicitação de Trocas com Assistente de IA -->
+    <section class="container" style="margin-top: 40px;" id="secao-troca-guiada">
+      <div class="troca-ia-box">
+        <div class="troca-ia-header">
+          <div class="chat-avatar" aria-hidden="true">P</div>
+          <div>
+            <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--color-dark-accessible);">Troca e Devolução Simplificada com IA</h2>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">A assistente conduz a solicitação com respeito às diretrizes da Anvisa e Código de Defesa do Consumidor.</p>
+          </div>
+        </div>
+
+        <div class="troca-steps-flex">
+          <div class="troca-info-col">
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 8px;">Regras Importantes:</h3>
+            <ul style="font-size: 0.9rem; line-height: 1.6; color: var(--color-text-main); display: flex; flex-direction: column; gap: 8px;">
+              <li><strong>Condições da troca:</strong> Dependem do produto, do motivo e do canal da compra. Consulte a política oficial antes de solicitar.</li>
+              <li><strong>Medicamentos:</strong> Peça avaliação ao atendimento oficial ou ao farmacêutico. Não utilize produtos com lacre rompido ou suspeita de defeito.</li>
+              <li><a href="https://www.paguemenos.com.br/politica-troca-devolucao" class="btn btn-secondary">Consultar política oficial de trocas e devoluções</a></li>
+            </ul>
+          </div>
+
+          <div class="troca-form-col">
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 12px;">Receber orientação:</h3>
+            <div class="form-group">
+              <p>Não precisamos de CPF, número de pedido ou documentos para explicar como buscar ajuda. Compartilhe esses dados apenas se forem necessários no atendimento oficial.</p>
+            </div>
+            <div class="form-group">
+              <label for="troca-motivo" class="form-label">Motivo da Solicitação</label>
+              <select id="troca-motivo" class="form-input">
+                <option value="violado">Produto com lacre rompido / violado</option>
+                <option value="defeito">Defeito de fábrica / Produto danificado</option>
+                <option value="arrependimento">Desistência / Arrependimento (embalagem fechada)</option>
+                <option value="divergente">Recebi um produto diferente do pedido</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" onclick="processarTrocaIA()">
+              Enviar e Falar com a Assistente de IA ✦
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chatbot Persistente com IA da Central de Ajuda -->
+    <section class="section-assistant" id="assistente-ia" style="margin-top: 50px;">
+      <div class="container assistant-container">
+        <div class="assistant-content">
+          <h2 class="assistant-title">Assistente de Ajuda & Pós-Venda</h2>
+          <p class="assistant-desc">
+            A assistente explica como acompanhar pedidos, consultar as regras de troca e encontrar o atendimento adequado.
+          </p>
+          <div class="quick-chips">
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Como rastrear meu pedido?')">Rastrear meu pedido</button>
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Qual a regra para trocar remédios?')">Regras para remédios</button>
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Quais são as regras para pedidos?')">Regras para pedidos</button>
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('O que fazer se o produto vier violado?')">Produto violado</button>
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Como usar a chave Pix?')">Como pagar com Pix</button>
+          </div>
+        </div>
+
+        <div class="assistant-widget-box" role="region" aria-label="Chat com a assistente de ajuda">
+          <div class="chat-header">
+            <div class="chat-avatar" aria-hidden="true"><span>P</span></div>
+            <div class="chat-header-info">
+              <span class="chat-title">Assistente Pague Menos · Ajuda</span>
+              <span class="chat-sub">Suporte com voz e texto</span>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chat-messages-container" aria-live="polite">
+            <div class="chat-bubble bot-bubble">
+              <p>Olá! Sou sua Assistente de Ajuda. Precisa de suporte com algum pedido, troca, pagamento ou entrega? Me diga como posso te ajudar!</p>
+            </div>
+          </div>
+
+          <form class="chat-input-bar" id="chat-form" onsubmit="event.preventDefault(); enviarMensagemChat();">
+            <input type="text" id="chat-input" class="chat-input-field" placeholder="Escreva sua dúvida aqui..." autocomplete="off">
+            <button type="button" class="btn-chat-mic" onclick="ativarBuscaPorVoz('chat-input', true)" title="Falar por voz">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </button>
+            <button type="submit" class="btn-chat-send" aria-label="Enviar mensagem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="container buying-guide" id="guia-de-compra" aria-labelledby="buying-guide-title" tabindex="-1">
+      <h2 id="buying-guide-title">Como comprar, no seu ritmo</h2>
+      <ol>
+        <li>Busque um produto pelo nome e escolha Adicionar.</li>
+        <li>Confira os produtos, as quantidades, o frete e o total no carrinho. Se remover algo por engano, use Desfazer remoção.</li>
+        <li>Confirme o CEP e escolha uma forma de pagamento.</li>
+        <li>Revise os produtos, o total e os dados de entrega. Entre na conta antes de confirmar o pedido.</li>
+      </ol>
+      <p>No chat, “O que faço agora?” explica a etapa atual. Ative “Compra simplificada” para ver um produto por vez. Use “Voltar para…” para revisar uma etapa.</p>
+      <p><strong>Teclado:</strong> Tab avança entre controles; Shift + Tab volta; Enter ativa botões e envia mensagens; Espaço ativa botões e abre a ajuda; Escape fecha o card aberto.</p>
+      <p><strong>Voz:</strong> “Falar por áudio” transcreve para você revisar antes de enviar. “Ativar áudio da assistente” liga a leitura; “Parar leitura” interrompe a fala. Todos os passos também funcionam por texto.</p>
+    </section>
+    <section class="container buying-guide" id="atendimento-humano" aria-labelledby="human-help-title" tabindex="-1">
+      <h2 id="human-help-title">Precisa falar com uma pessoa?</h2>
+      <p>Para atendimento da farmácia ou dúvidas sobre medicamentos, consulte os canais disponíveis na central oficial da Pague Menos.</p>
+      <a class="btn btn-primary" href="https://www.paguemenos.com.br/central-de-atendimento">Consultar atendimento no site oficial da Pague Menos</a>
+      <p>O link leva a outro site. Sua conversa não é enviada automaticamente para lá.</p>
+    </section>
+    <section class="container buying-guide" id="privacidade" aria-labelledby="privacy-title" tabindex="-1">
+      <h2 id="privacy-title">Seus dados e sua privacidade</h2>
+      <p>A primeira visita começa com carrinho vazio e sem CEP informado. Ao recarregar a página, as etapas e a conversa de compra recomeçam. O retorno deliberado do login pode retomar a etapa, para você não perder o processo de entrada.</p>
+      <p>O CEP que você informar e os produtos escolhidos ficam no armazenamento da própria aba. Os dados de compra são separados por conta e limpos ao sair ou trocar de conta. As preferências de acessibilidade ficam neste navegador.</p>
+      <p>O acesso à conta utiliza um serviço de autenticação. A senha não é salva pelo código do site. A sessão de acesso fica na aba do navegador. Se o login estiver indisponível, você será avisado antes de entrar.</p>
+      <p>O áudio é opcional. O navegador pode usar um serviço externo para transcrever sua fala; ele só é acionado quando você ativa o microfone. Também é possível fazer tudo por texto.</p>
+      <p>Não envie CPF, documentos, dados de saúde ou cartão no chat. Sua conversa não é enviada automaticamente ao atendimento da farmácia.</p>
+      <p>Em aparelho compartilhado, outra pessoa pode acessar uma sessão deixada aberta. Ao terminar, use “Sair e apagar meus dados desta aba”, disponível em “Preciso de ajuda”. Essa ação limpa a compra local e sai da sessão; não exclui a conta nem registros existentes no serviço de login.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-brand-col">
+        <div class="brand-logo footer-logo" aria-label="Pague Menos">
+          <img src="assets/logo-pague-menos.png" alt="Pague Menos" class="brand-img">
+          <div class="brand-text">
+            <span class="brand-name">Pague Menos</span>
+          </div>
+        </div>
+        <p class="footer-slogan">Saúde e cuidado ao seu alcance, do seu jeito.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Institucional</h3>
+        <ul class="footer-links">
+          <li><a href="sobre.html">Sobre a Pague Menos</a></li>
+          <li><a href="https://www.paguemenos.com.br/nossas-lojas">Nossas lojas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Ajuda</h3>
+        <ul class="footer-links">
+          <li><a href="ajuda.html">Central de ajuda</a></li>
+          <li><a href="ajuda.html#card-trocas">Trocas e devoluções</a></li>
+          <li><a href="index.html">Loja Online</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Acessibilidade</h3>
+        <ul class="footer-links">
+          <li><button type="button" class="btn-footer-link" onclick="abrirPainelAcessibilidade()">Central de acessibilidade</button></li>
+          <li><button type="button" class="btn-footer-link" onclick="sincronizarContraste(!appState.highContrast)">Alternar Alto Contraste</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-content">
+        <p>© 2026 Pague Menos · Central de Ajuda & Pós-Venda com IA</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Acessibilidade -->
+  <dialog id="modal-acessibilidade" class="accessibility-dialog" aria-labelledby="modal-a11y-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 id="modal-a11y-title" class="dialog-title">Central de Acessibilidade</h2>
+        <button type="button" class="btn-close-dialog" onclick="fecharPainelAcessibilidade()" aria-label="Fechar">✕</button>
+      </div>
+      <div class="dialog-body">
+        <div class="dialog-option-block">
+          <h3>Tamanho do Texto</h3>
+          <div class="font-zoom-selector">
+            <button type="button" class="btn-zoom-opt" onclick="ajustarEscalaFonte(-1)">Diminuir (−)</button>
+            <button type="button" class="btn-zoom-opt" onclick="resetarEscalaFonte()">Padrão (100%)</button>
+            <button type="button" class="btn-zoom-opt" onclick="ajustarEscalaFonte(1)">Aumentar (+)</button>
+          </div>
+        </div>
+        <div class="dialog-option-block">
+          <h3>Contraste</h3>
+          <label class="dialog-check-item">
+            <input type="checkbox" id="modal-toggle-contraste" onchange="sincronizarContraste(this.checked)">
+            <span>Alto Contraste Pague Menos (#13243B / #FFF5D6)</span>
+          </label>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-primary" onclick="fecharPainelAcessibilidade()">Aplicar e Fechar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="toast-notification" class="toast" aria-hidden="true"></div>
+
+  <script src="privacy.js"></script>
+  <script src="script.js"></script>
+  <script src="auth-config.js"></script>
+  <script src="auth.js"></script>
+  <script src="accessible-help.js"></script>
+  <script>
+    function pesquisarAjuda() {
+      const input = document.getElementById('input-ajuda-busca');
+      const val = input ? input.value.trim() : '';
+      if (!val) {
+        mostrarToast('Digite sua dúvida de ajuda.');
+        return;
+      }
+      focarAssistenteIA();
+      enviarMensagemRapida(`Dúvida sobre: ${val}`);
+    }
+
+    function perguntarIA(pergunta) {
+      focarAssistenteIA();
+      enviarMensagemRapida(pergunta);
+    }
+
+    function iniciarFluxoTrocaIA() {
+      const secao = document.getElementById('secao-troca-guiada');
+      if (secao) {
+        secao.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      mostrarToast('Escolha o motivo para receber orientação. Não envie dados pessoais.');
+    }
+
+    function processarTrocaIA() {
+      const motivo = document.getElementById('troca-motivo').value;
+      const perguntas = {
+        violado: 'O que fazer se o produto vier violado?',
+        defeito: 'Como pedir orientação sobre um produto com defeito?',
+        arrependimento: 'Como solicitar devolução por arrependimento?',
+        divergente: 'Como solicitar troca de produto diferente do pedido?'
+      };
+      focarAssistenteIA();
+      enviarMensagemRapida(perguntas[motivo] || 'Como solicitar orientação sobre trocas?');
+    }
+  </script>
+</body>
+</html>

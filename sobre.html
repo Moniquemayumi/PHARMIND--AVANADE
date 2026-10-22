@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sobre a Pague Menos - Conheça nossa história, compromisso com a saúde, inclusão e inovação acessível com apoio de Inteligência Artificial.">
+  <title>Sobre a Pague Menos | Inclusão e Saúde ao seu Alcance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="accessible-flows.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+  <div id="status-acessibilidade" class="sr-only" aria-live="polite"></div>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-notice">
+        <span>Conheça nossa trajetória de mais de 40 anos cuidando do Brasil</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="index.html" class="top-link">← Voltar à Loja Principal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header" role="banner">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" aria-label="Pague Menos Acessível - Página inicial">
+        <img src="assets/logo-pague-menos.png" alt="Pague Menos" class="brand-img">
+        <div class="brand-text">
+          <span class="brand-name">Pague Menos</span>
+          <span class="brand-sub">Institucional & Inclusão</span>
+        </div>
+      </a>
+
+      <!-- Atalho Rápido para IA -->
+      <button class="action-btn btn-ai-quick-shortcut" onclick="focarAssistenteIA()" aria-label="Tirar dúvidas sobre a empresa com a IA">
+        <span class="ai-sparkle-icon" aria-hidden="true">✦</span>
+        <span>Perguntar para a IA sobre a história</span>
+      </button>
+
+      <div class="header-actions">
+        <div class="btn-group-font" role="group" aria-label="Ajuste do tamanho do texto">
+          <button type="button" class="btn-font-step" onclick="ajustarEscalaFonte(-1)" aria-label="Diminuir texto">A−</button>
+          <button type="button" class="btn-font-step" onclick="ajustarEscalaFonte(1)" aria-label="Aumentar texto">A+</button>
+        </div>
+
+        <button class="action-btn action-accessibility" onclick="abrirPainelAcessibilidade()" aria-label="Opções de acessibilidade">
+          <div class="action-icon-circle">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <circle cx="12" cy="4" r="2"/>
+              <path d="M19 13v-2c-1.54.02-3.09-.75-4.07-1.83l-1.29-1.43c-.4-.44-1.04-.74-1.64-.74-.6 0-1.24.3-1.64.74L9.07 9.17C8.09 10.25 6.54 11.02 5 11v2c1.86-.02 3.63-.9 4.79-2.18L11 9.6V15l-3.3 6.6c-.34.68-.07 1.5.61 1.84.68.34 1.5.07 1.84-.61L12 18.9l1.85 3.93c.34.68 1.16.95 1.84.61.68-.34.95-1.16.61-1.84L13 15V9.6l1.21 1.22C15.37 12.1 17.14 12.98 19 13z"/>
+            </svg>
+          </div>
+          <span>Acessibilidade</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" tabindex="-1">
+    
+    <section class="help-hero">
+      <div class="container help-hero-container">
+        <span class="welcome-badge">Nossa Essência</span>
+        <h1 class="help-hero-title">Saúde e cuidado ao seu alcance, do seu jeito.</h1>
+        <p class="help-hero-desc">
+          Fundada em 1981 em Fortaleza (CE), a Pague Menos se tornou uma das maiores redes farmacêuticas do Brasil, com mais de 1.600 lojas em todos os estados e no Distrito Federal.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pilares Institucionais -->
+    <section class="container" style="padding: 40px 24px;">
+      <div class="features-grid" style="grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        
+        <div class="feature-card" style="flex-direction: column; align-items: flex-start;">
+          <div class="feature-icon" style="width: 50px; height: 50px; font-size: 1.4rem;">❤️</div>
+          <h3 class="feature-title" style="font-size: 1.15rem; margin-top: 8px;">Cuidado com as Pessoas</h3>
+          <p class="feature-desc" style="font-size: 0.9rem; line-height: 1.5;">
+            Acreditamos que saúde é um direito fundamental. Nossas farmácias são centros integrados de atendimento farmacêutico, exames preventivos (Clinic Farma) e orientação humanizada.
+          </p>
+        </div>
+
+        <div class="feature-card" style="flex-direction: column; align-items: flex-start;">
+          <div class="feature-icon" style="width: 50px; height: 50px; font-size: 1.4rem;">♿</div>
+          <h3 class="feature-title" style="font-size: 1.15rem; margin-top: 8px;">Inclusão & Acessibilidade Real</h3>
+          <p class="feature-desc" style="font-size: 0.9rem; line-height: 1.5;">
+            O projeto <strong>Pague Menos Acessível</strong> nasceu para que pessoas com baixa visão, dislexia, daltonismo ou limitações motoras comprem com independência, voz e segurança total.
+          </p>
+        </div>
+
+        <div class="feature-card" style="flex-direction: column; align-items: flex-start;">
+          <div class="feature-icon" style="width: 50px; height: 50px; font-size: 1.4rem;">🤖</div>
+          <h3 class="feature-title" style="font-size: 1.15rem; margin-top: 8px;">Inovação com Inteligência Artificial</h3>
+          <p class="feature-desc" style="font-size: 0.9rem; line-height: 1.5;">
+            Usamos inteligência artificial para quebrar barreiras: você pode buscar remédios por voz, ouvir bulas simplificadas e concluir o pagamento com um assistente atencioso do início ao fim.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Timeline / Fatos Históricos -->
+    <section class="container" style="padding: 20px 24px 50px;">
+      <div class="catalog-card-container">
+        <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-dark-accessible); margin-bottom: 20px;">
+          Marcos que transformaram a saúde no Brasil
+        </h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <div style="padding: 16px; background-color: var(--color-surface-soft); border-left: 4px solid var(--color-action-blue); border-radius: 4px;">
+            <strong style="font-size: 1.05rem; color: var(--color-identity);">1981 · O Começo em Fortaleza</strong>
+            <p style="font-size: 0.9rem; margin-top: 4px; color: var(--color-text-main);">Inauguração da primeira farmácia Pague Menos com a proposta pioneira de preços acessíveis e acolhimento direto ao cliente.</p>
+          </div>
+
+          <div style="padding: 16px; background-color: var(--color-surface-soft); border-left: 4px solid var(--color-accent-red); border-radius: 4px;">
+            <strong style="font-size: 1.05rem; color: var(--color-accent-red);">Cidadania e Desconto Solidário</strong>
+            <p style="font-size: 0.9rem; margin-top: 4px; color: var(--color-text-main);">Pioneirismo em campanhas sociais como a doação de ambulâncias e incentivo à prática de hábitos saudáveis com o Circuito de Corridas.</p>
+          </div>
+
+          <div style="padding: 16px; background-color: var(--color-surface-soft); border-left: 4px solid #16A34A; border-radius: 4px;">
+            <strong style="font-size: 1.05rem; color: var(--color-identity);">Clinic Farma · Consultórios nas Lojas</strong>
+            <p style="font-size: 0.9rem; margin-top: 4px; color: var(--color-text-main);">Criação de consultórios farmacêuticos com testes de glicemia, aferição de pressão, acompanhamento de diabetes e aplicação de vacinas.</p>
+          </div>
+
+          <div style="padding: 16px; background-color: var(--color-surface-soft); border-left: 4px solid var(--color-action-blue); border-radius: 4px;">
+            <strong style="font-size: 1.05rem; color: var(--color-identity);">2026 · Pague Menos Acessível com IA</strong>
+            <p style="font-size: 0.9rem; margin-top: 4px; color: var(--color-text-main);">Lançamento da plataforma totalmente inclusiva, compatível com tecnologias assistivas, voz e IA que acompanha do início ao pagamento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chat com a IA sobre o Institucional -->
+    <section class="section-assistant" id="assistente-ia">
+      <div class="container assistant-container">
+        <div class="assistant-content">
+          <h2 class="assistant-title">Quer saber mais sobre a Pague Menos?</h2>
+          <p class="assistant-desc">
+            Nossa Assistente de IA conhece toda a história, ações comunitárias, presença das lojas e diretrizes de sustentabilidade e ESG da companhia.
+          </p>
+          <div class="quick-chips">
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Quantas lojas a Pague Menos tem no Brasil?')">Quantas lojas existem?</button>
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('O que é o Clinic Farma?')">O que é Clinic Farma?</button>
+            <button type="button" class="chip-item" onclick="enviarMensagemRapida('Como a Pague Menos apoia a acessibilidade?')">Acessibilidade na empresa</button>
+          </div>
+        </div>
+
+        <div class="assistant-widget-box" role="region" aria-label="Janela da assistente">
+          <div class="chat-header">
+            <div class="chat-avatar" aria-hidden="true"><span>P</span></div>
+            <div class="chat-header-info">
+              <span class="chat-title">Assistente Pague Menos · História</span>
+              <span class="chat-sub">Apoiando com voz e texto</span>
+            </div>
+          </div>
+          <div class="chat-messages" id="chat-messages-container" aria-live="polite">
+            <div class="chat-bubble bot-bubble">
+              <p>Olá! Adoro contar a história da Pague Menos. Sabia que estamos presentes em todos os 26 estados brasileiros e no DF? O que você gostaria de saber?</p>
+            </div>
+          </div>
+          <form class="chat-input-bar" id="chat-form" onsubmit="event.preventDefault(); enviarMensagemChat();">
+            <input type="text" id="chat-input" class="chat-input-field" placeholder="Pergunte sobre a Pague Menos..." autocomplete="off">
+            <button type="button" class="btn-chat-mic" onclick="ativarBuscaPorVoz('chat-input', true)" title="Falar por voz">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </button>
+            <button type="submit" class="btn-chat-send" aria-label="Enviar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-brand-col">
+        <div class="brand-logo footer-logo" aria-label="Pague Menos">
+          <img src="assets/logo-pague-menos.png" alt="Pague Menos" class="brand-img">
+          <div class="brand-text">
+            <span class="brand-name">Pague Menos</span>
+          </div>
+        </div>
+        <p class="footer-slogan">Saúde e cuidado ao seu alcance, do seu jeito.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Institucional</h3>
+        <ul class="footer-links">
+          <li><a href="sobre.html">Sobre a Pague Menos</a></li>
+          <li><a href="https://www.paguemenos.com.br/nossas-lojas">Nossas lojas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Ajuda</h3>
+        <ul class="footer-links">
+          <li><a href="ajuda.html">Central de ajuda</a></li>
+          <li><a href="ajuda.html#card-trocas">Trocas e devoluções</a></li>
+          <li><a href="index.html">Loja Online</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Acessibilidade</h3>
+        <ul class="footer-links">
+          <li><button type="button" class="btn-footer-link" onclick="abrirPainelAcessibilidade()">Central de acessibilidade</button></li>
+          <li><button type="button" class="btn-footer-link" onclick="sincronizarContraste(!appState.highContrast)">Alternar Alto Contraste</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-content">
+        <p>© 2026 Pague Menos · Institucional</p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="modal-acessibilidade" class="accessibility-dialog" aria-labelledby="modal-a11y-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 id="modal-a11y-title" class="dialog-title">Central de Acessibilidade</h2>
+        <button type="button" class="btn-close-dialog" onclick="fecharPainelAcessibilidade()" aria-label="Fechar">✕</button>
+      </div>
+      <div class="dialog-body">
+        <div class="dialog-option-block">
+          <h3>Tamanho do Texto</h3>
+          <div class="font-zoom-selector">
+            <button type="button" class="btn-zoom-opt" onclick="ajustarEscalaFonte(-1)">Diminuir (−)</button>
+            <button type="button" class="btn-zoom-opt" onclick="resetarEscalaFonte()">Padrão (100%)</button>
+            <button type="button" class="btn-zoom-opt" onclick="ajustarEscalaFonte(1)">Aumentar (+)</button>
+          </div>
+        </div>
+        <div class="dialog-option-block">
+          <h3>Contraste</h3>
+          <label class="dialog-check-item">
+            <input type="checkbox" id="modal-toggle-contraste" onchange="sincronizarContraste(this.checked)">
+            <span>Alto Contraste Pague Menos (#13243B / #FFF5D6)</span>
+          </label>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-primary" onclick="fecharPainelAcessibilidade()">Aplicar e Fechar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="toast-notification" class="toast" aria-hidden="true"></div>
+  <script src="privacy.js"></script>
+  <script src="script.js"></script>
+  <script src="auth-config.js"></script>
+  <script src="auth.js"></script>
+  <script src="accessible-help.js"></script>
+</body>
+</html>

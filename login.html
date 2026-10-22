@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar na conta | Pague Menos Acessível</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="accessible-flows.css">
+</head>
+<body class="simple-reading">
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+  <header class="main-header">
+    <div class="container header-container login-header">
+      <a class="brand-logo" href="index.html" aria-label="Pague Menos Acessível — início">
+        <img class="brand-img" src="assets/logo-pague-menos.png" alt="">
+        <span class="brand-text"><span class="brand-name">Pague Menos</span><span class="brand-sub">Acessível</span></span>
+      </a>
+      <div class="guided-controls" role="group" aria-label="Ajustes de acessibilidade">
+        <button type="button" class="btn btn-secondary" onclick="ajustarEscalaFonte(1)" aria-label="Aumentar tamanho do texto">A+</button>
+        <button type="button" class="btn btn-secondary" onclick="ajustarEscalaFonte(-1)" aria-label="Diminuir tamanho do texto">A−</button>
+        <button type="button" class="btn btn-secondary" onclick="sincronizarContraste(!appState.highContrast)">Alternar contraste</button>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo-principal" class="login-layout" tabindex="-1">
+    <div id="status-acessibilidade" class="sr-only" role="status" aria-atomic="true"></div>
+    <section class="login-intro" aria-labelledby="login-title">
+      <p class="login-eyebrow">Sua compra, no seu ritmo</p>
+      <h1 id="login-title">Entre para concluir sua compra</h1>
+      <p>Seu carrinho fica guardado enquanto você entra. Depois, continue com a assistente por texto ou voz.</p>
+      <a href="index.html" class="btn btn-secondary">Voltar à loja sem entrar</a>
+    </section>
+    <section class="login-card" aria-label="Acesso à conta">
+      <p id="auth-status" class="auth-status" role="status" tabindex="-1">Verificando disponibilidade do login…</p>
+      <div id="login-panel">
+        <h2>Acessar minha conta</h2>
+        <form id="login-form" onsubmit="PMAuth.login(event)">
+          <div class="form-group"><label class="form-label" for="auth-email">E-mail</label><input class="form-input" type="email" id="auth-email" autocomplete="username" inputmode="email" required></div>
+          <div class="form-group"><label class="form-label" for="auth-password">Senha</label><input class="form-input" type="password" id="auth-password" autocomplete="current-password" aria-describedby="password-help" required><p id="password-help">Para criar uma conta, use pelo menos 8 caracteres.</p></div>
+          <label class="login-check"><input type="checkbox" onchange="document.getElementById('auth-password').type = this.checked ? 'text' : 'password'"> Mostrar senha</label>
+          <button type="submit" class="btn btn-primary btn-block" data-auth-action>Entrar e continuar</button>
+          <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.signup()">Criar conta com e-mail</button>
+          <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.google()">Continuar com Google</button>
+          <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.resetPassword()">Esqueci minha senha</button>
+        </form>
+      </div>
+      <div id="account-panel" hidden>
+        <h2>Olá, <span id="account-name">cliente</span></h2>
+        <p>Sua conta está conectada. Você pode vincular o Google para facilitar o próximo acesso.</p>
+        <button type="button" class="btn btn-primary btn-block" onclick="PMAuth.continuePurchase()">Continuar minha compra</button>
+        <button type="button" id="link-google" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.google(true)">Vincular minha conta ao Google</button>
+        <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.logout()">Sair da conta</button>
+      </div>
+      <form id="recovery-panel" hidden onsubmit="PMAuth.updatePassword(event)">
+        <h2>Criar nova senha</h2>
+        <label class="form-label" for="new-password">Nova senha, com pelo menos 8 caracteres</label>
+        <input class="form-input" type="password" id="new-password" autocomplete="new-password" minlength="8" required>
+        <button class="btn btn-primary btn-block" data-auth-action type="submit">Salvar nova senha</button>
+      </form>
+    </section>
+  </main>
+  <div id="toast-notification" class="toast" aria-hidden="true"></div>
+  <script src="privacy.js"></script>
+  <script src="script.js"></script>
+  <script src="auth-config.js"></script>
+  <script src="auth.js"></script>
+  <script src="accessible-help.js"></script>
+</body>
+</html>

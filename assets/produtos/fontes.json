@@ -1,0 +1,170 @@
+[
+  {
+    "id": "med-01",
+    "nome": "Analgésico Dorflex 36 Comprimidos",
+    "imagem": "assets/produtos/med-01.jpg",
+    "fonte": "https://www.paguemenos.com.br/dorflex-analgesico-e-relaxante-muscular-36-comprimidos/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1028780/Padrao-1200.jpg?v=639281011896230000"
+  },
+  {
+    "id": "med-02",
+    "nome": "Dipirona Monoidratada 500mg 10 Comprimidos Genérico EMS",
+    "imagem": "assets/produtos/med-02.png",
+    "fonte": "https://www.paguemenos.com.br/dipirona-500mg-envelope-com-10-comprimidos-generico-ems/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1145859/7896004703398_0.png?v=639094608807900000"
+  },
+  {
+    "id": "med-03",
+    "nome": "Analgésico Neosaldina Dipirona Caixa 20 Drágeas",
+    "imagem": "assets/produtos/med-03.jpg",
+    "fonte": "https://www.paguemenos.com.br/neosaldina-com-20-drageas/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1199055/7896094921979_1.jpg?v=639186046297130000"
+  },
+  {
+    "id": "med-04",
+    "nome": "Antigripal Cimegripe 20 Cápsulas",
+    "imagem": "assets/produtos/med-04.jpg",
+    "fonte": "https://www.paguemenos.com.br/cimegripe-com-20-comprimidos/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/793226/7896523200576---Cimegripe-com-20-Capsulas---1.jpg"
+  },
+  {
+    "id": "med-05",
+    "nome": "Paracetamol 500mg 10 Comprimidos Genérico Prati-Donaduzzi",
+    "imagem": "assets/produtos/med-05.jpg",
+    "fonte": "https://www.paguemenos.com.br/paracetamol-500mg-envelope-com-10-c0omprimidos-genericos-prati-donaduzzi/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/958158/Custom-dimensions-1000x1000-px--4-.jpg?v=638680084178500000"
+  },
+  {
+    "id": "pel-01",
+    "nome": "NIVEA Loção Hidratante Milk Pele Seca a Extrasseca 400ml",
+    "imagem": "assets/produtos/pel-01.jpg",
+    "fonte": "https://www.paguemenos.com.br/hidratante-nivea-milk-pele-seca-a-extra-seca-400ml/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1154569/4005808315697-NIVEA_Lo_o_Hidratante_Milk_Pele_Seca_a_Extrasseca_400ml-Body__Hand-NIVEA--1-.jpg?v=639104870037630000"
+  },
+  {
+    "id": "pel-02",
+    "nome": "Protetor Labial Nivea Sun Protect Hidratante FPS30 4,8g",
+    "imagem": "assets/produtos/pel-02.png",
+    "fonte": "https://www.paguemenos.com.br/nivea-protetor-solar-hidratante-labial-sun-protect-fps-30-4-8-g/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/881765/nivea-protetor-solar-hidratante-labial-sun-protect-fps-30-4-8-g-principal.png?v=638525886607930000"
+  },
+  {
+    "id": "pel-03",
+    "nome": "Protetor Solar Facial Episol Sec Acqua FPS60 Incolor 40ml",
+    "imagem": "assets/produtos/pel-03.png",
+    "fonte": "https://www.paguemenos.com.br/protetor-solar-facial-mantecorp-skincare-episol-sec-acqua-fps60-40ml/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/993043/protetor-solar-facial-mantecorp-skincare-episol-sec-acqua-fps60-40ml-principal.png?v=638769528228430000"
+  },
+  {
+    "id": "pel-04",
+    "nome": "CeraVe Loção Hidratante Corporal 473ml",
+    "imagem": "assets/produtos/pel-04.jpg",
+    "fonte": "https://www.paguemenos.com.br/cerave-locao-hidratante-473ml/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1172944/00_Selo Derm e Textura.jpg?v=639148095377830000"
+  },
+  {
+    "id": "pel-05",
+    "nome": "Creme Hidratante Bepantol Derma Toque Seco Oil Free Pele Normal a Seca 30g",
+    "imagem": "assets/produtos/pel-05.jpg",
+    "fonte": "https://www.paguemenos.com.br/bepantol-derma-creme-hidratante-toque-seco-oil-free-para-pele-normal-a-seca-com-30g/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1225798/7891106913522_1.jpg?v=639252433428000000"
+  },
+  {
+    "id": "hig-01",
+    "nome": "Sabonete em Barra Dove Original Hidratante 90g",
+    "imagem": "assets/produtos/hig-01.jpg",
+    "fonte": "https://www.paguemenos.com.br/sabonete-dove-original-90g/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1170892/7898422746759_1.jpg?v=639137489009400000"
+  },
+  {
+    "id": "hig-02",
+    "nome": "Desodorante Antitranspirante Rexona Clinical Classic 96h Aerossol 150ml",
+    "imagem": "assets/produtos/hig-02.jpg",
+    "fonte": "https://www.paguemenos.com.br/desodorante-rexona-clinical-classic-3x-mais-protecao-96h-aerossol-91g/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/825883/desodorante-rexona-clinical-classic-150-ml_7506306214989_1.jpg?v=639093537874170000"
+  },
+  {
+    "id": "hig-03",
+    "nome": "Shampoo Pantene Pro-V Restauração 400ml",
+    "imagem": "assets/produtos/hig-03.jpg",
+    "fonte": "https://www.paguemenos.com.br/shampoo-pantene-restauracao-400ml/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/985310/shampoo-pantene-restauracao-400ml-principal.jpg?v=638749836557270000"
+  },
+  {
+    "id": "buc-01",
+    "nome": "Escova Dental Sensodyne Sensibilidade & Esmalte Cerda Macia 1 Unidade",
+    "imagem": "assets/produtos/buc-01.png",
+    "fonte": "https://www.paguemenos.com.br/escova-de-dente-sensodyne-sensibilidade-esmalte-macia/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/948310/escova-de-dente-sensodyne-sensibilidade-esmalte-macia-principal.png?v=638659990801600000"
+  },
+  {
+    "id": "buc-02",
+    "nome": "Creme Dental Colgate Total 12 Whitening 90g",
+    "imagem": "assets/produtos/buc-02.jpg",
+    "fonte": "https://www.paguemenos.com.br/creme-dental-colgate-total-12-whitening-90g/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/637332/creme-dental-colgate-total-12-whitening-90g-principal.jpg?v=637992433285270000"
+  },
+  {
+    "id": "buc-03",
+    "nome": "Antisséptico Bucal Listerine Cool Mint Refrescância Intensa Sabor Hortelã 500ml",
+    "imagem": "assets/produtos/buc-03.jpg",
+    "fonte": "https://www.paguemenos.com.br/antisseptico-bucal-listerine-cool-mint-500ml/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1224071/7891010256753_1.jpg?v=639247264004830000"
+  },
+  {
+    "id": "buc-04",
+    "nome": "Fio Dental Reach Essencial Expansion Plus Sabor Menta 100 metros",
+    "imagem": "assets/produtos/buc-04.jpg",
+    "fonte": "https://www.paguemenos.com.br/fio-dental-reach-johnsons-essencial-100m/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/638999/fio-dental-reach-johnsons-essencial-100m-principal.jpg?v=638007997188000000"
+  },
+  {
+    "id": "beb-01",
+    "nome": "Fralda Pampers Confort Sec M 70 Unidades",
+    "imagem": "assets/produtos/beb-01.jpg",
+    "fonte": "https://www.paguemenos.com.br/fralda-pampers-confort-sec-m-com-70-unidades/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1116258/7500435106665_1.jpg?v=639017460147830000"
+  },
+  {
+    "id": "beb-02",
+    "nome": "Lenços Umedecidos Pampers Cuidado de Bebê 48 Unidades",
+    "imagem": "assets/produtos/beb-02.jpg",
+    "fonte": "https://www.paguemenos.com.br/lencos-umedecidos-pampers-regular-48-unidades/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1170493/4015400763697_1.jpg?v=639136148088270000"
+  },
+  {
+    "id": "beb-03",
+    "nome": "Creme Preventivo De Assaduras Desitin Máxima Duração 57G",
+    "imagem": "assets/produtos/beb-03.jpg",
+    "fonte": "https://www.paguemenos.com.br/desitin-maxima-duracao-57g/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/708588/desitin-maxima-duracao-creme-preventivo-de-assaduras-57g_7702031694908_1.jpg?v=639094633363800000"
+  },
+  {
+    "id": "vit-01",
+    "nome": "Suplemento Alimentar Lavitan AZ Original 60 Comprimidos",
+    "imagem": "assets/produtos/vit-01.jpg",
+    "fonte": "https://www.paguemenos.com.br/lavitan-az-com-60-comprimidos/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/927133/7897947606517-1-.jpg?v=638612248882230000"
+  },
+  {
+    "id": "vit-02",
+    "nome": "Suplemento Alimentar Lavitan Cabelos E Unhas 30 Cápsulas",
+    "imagem": "assets/produtos/vit-02.jpg",
+    "fonte": "https://www.paguemenos.com.br/lavitan-cabelos-e-unhas-com-30-capsulas/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/927192/7897947607996_1.jpg?v=638612249064200000"
+  },
+  {
+    "id": "vit-03",
+    "nome": "Vitamina C Redoxon 1g Sabor Laranja 10 Comprimidos Efervescentes",
+    "imagem": "assets/produtos/vit-03.jpg",
+    "fonte": "https://www.paguemenos.com.br/redoxon-1g-laranja-com-10-comprimidos-efervescentes/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/1233649/7891106006279_1.jpg?v=639270001840800000"
+  },
+  {
+    "id": "vit-04",
+    "nome": "Centrum de A a Zinco Adulto 30 Comprimidos",
+    "imagem": "assets/produtos/vit-04.jpg",
+    "fonte": "https://www.paguemenos.com.br/centrum-completo-de-a-a-zinco-com-30-comprimidos/p",
+    "imagemOriginal": "https://paguemenos.vteximg.com.br/arquivos/ids/987732/centrum-multivitaminico-adulto-com-vitaminas-de-a-a-z-30-comprimidos_7891045040679_1.jpg?v=638840303266000000"
+  }
+]
