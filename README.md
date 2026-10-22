@@ -4,7 +4,7 @@ Front-end desenvolvido com foco em acessibilidade e meta de verificação **WCAG
 
 ---
 
-## 🎨 Design System e Tokens Extraídos do Figma
+## Design System e Tokens Extraídos do Figma
 - **Azul de Identidade**: `#1427A0`
 - **Azul Escuro Acessível**: `#102B73`
 - **Azul de Ação**: `#0F5CC0`
@@ -18,7 +18,7 @@ Front-end desenvolvido com foco em acessibilidade e meta de verificação **WCAG
 
 ---
 
-## ♿ Recursos de Acessibilidade Implementados
+## Recursos de Acessibilidade Implementados
 
 1. **Ajuste Dinâmico de Tamanho de Texto (`A-` / `A+`)**:
    - Controle direto no banner principal e na Central de Acessibilidade.
@@ -39,12 +39,3 @@ Front-end desenvolvido com foco em acessibilidade e meta de verificação **WCAG
 8. **Assistente Virtual Interativo com IA**:
    - Chatbot acessível com sugestões rápidas, busca guiada e orientações por assunto e fluxo de compra guiado.
 
----
-
-## 🚀 Como Executar
-
-Por ser construído em **HTML5 Semântico, CSS3 Moderno e JavaScript Puro (Vanilla)**, você não precisa instalar nenhuma dependência ou Node.js!
-
-Basta:
-1. Dar um duplo clique no arquivo [`index.html`](index.html) para abrir diretamente no navegador (Chrome, Edge, Firefox, etc.).
-2. Ou servir via Live Server no VS Code / qualquer servidor estático.
