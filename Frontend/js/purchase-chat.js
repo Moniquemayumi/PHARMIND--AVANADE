@@ -301,7 +301,7 @@ window.PMChat = (() => {
     products.forEach(product => {
       const card = document.createElement('div'); card.className = 'guided-product';
       const image = document.createElement('img'); image.src = product.imagem; image.alt = ''; image.loading = 'lazy';
-      image.onerror = () => { image.onerror = null; image.src = 'assets/produto-sem-foto.svg'; };
+      image.onerror = () => { image.onerror = null; image.src = '../css/assets/produto-sem-foto.svg'; };
       const label = document.createElement('p'); label.textContent = `${product.nome} — ${money(product.preco)}`;
       card.append(image, label, button(`Adicionar ${product.nome}`, () => {
         clearNotice();
