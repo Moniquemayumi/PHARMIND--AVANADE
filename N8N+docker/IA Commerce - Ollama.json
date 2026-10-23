@@ -1,0 +1,319 @@
+{
+  "name": "IA Commerce - Ollama",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=Você é um assistente de farmácia. Responda em português.\nRegras:\n1. Para recomendar qualquer produto, SEMPRE use a ferramenta buscar_produtos primeiro.\n2. Nunca invente produtos ou preços. Use só o que a ferramenta retornar.\n3. Pergunte sobre alergias e gravidez antes de recomendar remédios.\n4. Se o cliente se encaixa em \"contra\" do produto, não recomende.\n5. Se \"receita\" for verdadeiro, avise que precisa de receita.\n6. Quando o cliente escolher produtos, use montar_carrinho com o formato nome : quantidade : preco(preço vindo de buscar_produtos).\n7. Mostre o resumo e peça confirmação. Se confirmar, termine a mensagem com a linha COMPRAR: <itens>.\n8. O cliente logado é {{ $('Webhook').item.json.body.clienteId }}. No início da conversa, use consultar_cliente.\n9. Não pergunte o que já está no perfil. Respeite alergias e condições (ex: gestante) ao recomendar.\n10. Se ele já comprou algo parecido, ofereça recompra."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        688,
+        0
+      ],
+      "id": "48ee137e-ee9a-4b5e-91d8-0f275556b9eb",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "qwen3:4b",
+        "options": {
+          "think": true,
+          "numCtx": 8192
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        688,
+        176
+      ],
+      "id": "8346ef0a-f850-41f7-bcc9-e3a5b4413e76",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "gEkPzxLn2JNUi1mX",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('filtro').first().json.sessionId }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        784,
+        352
+      ],
+      "id": "86ae01a4-f044-42e9-8fef-62e70f49d7ab",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "description": "Busca produtos de farmácia por sintoma ou nome (ex: dor de cabeça, azia). Retorna os mais baratos primeiro, com preço, contraindicações e se exige receita. Entrada: o sintoma ou nome, em texto.",
+        "language": "python",
+        "pythonCode": "# Base de teste (dados FICTÍCIOS). Para adicionar produto, copie uma linha e mude os valores.\nPRODUTOS = [\n  {\"id\":\"P001\",\"nome\":\"Dipirona 500mg 10 comprimidos\",\"indicacoes\":[\"dor\",\"dor de cabeça\",\"febre\"],\"contra\":[\"alergia a dipirona\",\"gestante\",\"crianca menor de 3 meses\"],\"preco\":8.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P002\",\"nome\":\"Paracetamol 750mg 20 comprimidos (genérico)\",\"indicacoes\":[\"dor\",\"dor de cabeça\",\"febre\",\"gripe\"],\"contra\":[\"doenca no figado\",\"uso de alcool em excesso\"],\"preco\":11.5,\"receita\":False,\"generico\":True},\n  {\"id\":\"P003\",\"nome\":\"Ibuprofeno 400mg 10 cápsulas\",\"indicacoes\":[\"dor\",\"inflamação\",\"cólica\",\"febre\"],\"contra\":[\"gestante\",\"gastrite\",\"alergia a aines\",\"uso de anticoagulante\",\"crianca pequena\"],\"preco\":19.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P004\",\"nome\":\"Ibuprofeno 600mg 10 comprimidos (genérico)\",\"indicacoes\":[\"dor\",\"inflamação\"],\"contra\":[\"gestante\",\"gastrite\",\"alergia a aines\",\"uso de anticoagulante\"],\"preco\":14.9,\"receita\":False,\"generico\":True},\n  {\"id\":\"P005\",\"nome\":\"Naproxeno 500mg 10 comprimidos\",\"indicacoes\":[\"dor\",\"inflamação\",\"dor muscular\"],\"contra\":[\"gestante\",\"gastrite\",\"alergia a aines\",\"hipertensao\"],\"preco\":22.5,\"receita\":False,\"generico\":False},\n  {\"id\":\"P006\",\"nome\":\"Diclofenaco gel 60g\",\"indicacoes\":[\"dor muscular\",\"dor nas costas\",\"inflamação\",\"torção\"],\"contra\":[\"alergia a aines\",\"pele machucada\"],\"preco\":16.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P007\",\"nome\":\"Buscopan Composto 20 comprimidos\",\"indicacoes\":[\"cólica\",\"dor abdominal\"],\"contra\":[\"glaucoma\",\"gestante\",\"prostata aumentada\"],\"preco\":24.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P008\",\"nome\":\"Loratadina 10mg 12 comprimidos (genérico)\",\"indicacoes\":[\"alergia\",\"coriza\",\"coceira\",\"rinite\"],\"contra\":[\"alergia a loratadina\",\"gestante\"],\"preco\":9.9,\"receita\":False,\"generico\":True},\n  {\"id\":\"P009\",\"nome\":\"Cetirizina 10mg 10 comprimidos\",\"indicacoes\":[\"alergia\",\"coceira\",\"rinite\",\"urticária\"],\"contra\":[\"doenca nos rins\",\"gestante\"],\"preco\":13.5,\"receita\":False,\"generico\":False},\n  {\"id\":\"P010\",\"nome\":\"Omeprazol 20mg 28 cápsulas (genérico)\",\"indicacoes\":[\"azia\",\"refluxo\",\"estômago\",\"gastrite\"],\"contra\":[\"uso prolongado sem orientacao\"],\"preco\":21.0,\"receita\":False,\"generico\":True},\n  {\"id\":\"P011\",\"nome\":\"Sal de Fruta 2 envelopes\",\"indicacoes\":[\"azia\",\"má digestão\",\"estômago\"],\"contra\":[\"hipertensao\",\"doenca no rim\"],\"preco\":4.5,\"receita\":False,\"generico\":False},\n  {\"id\":\"P012\",\"nome\":\"Simeticona 40mg 20 comprimidos\",\"indicacoes\":[\"gases\",\"má digestão\",\"estômago\"],\"contra\":[],\"preco\":10.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P013\",\"nome\":\"Soro de Reidratação Oral 5 sachês\",\"indicacoes\":[\"diarreia\",\"desidratação\",\"vômito\"],\"contra\":[],\"preco\":18.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P014\",\"nome\":\"Loperamida 2mg 12 comprimidos\",\"indicacoes\":[\"diarreia\"],\"contra\":[\"diarreia com sangue\",\"febre alta\",\"crianca menor de 6 anos\"],\"preco\":12.9,\"receita\":False,\"generico\":True},\n  {\"id\":\"P015\",\"nome\":\"Xarope de Guaco 120ml\",\"indicacoes\":[\"tosse\",\"gripe\",\"garganta\"],\"contra\":[\"diabetes\",\"gestante\"],\"preco\":15.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P016\",\"nome\":\"Acetilcisteína 600mg 16 sachês\",\"indicacoes\":[\"tosse com catarro\",\"gripe\"],\"contra\":[\"asma\",\"ulcera\"],\"preco\":29.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P017\",\"nome\":\"Pastilhas para garganta 12 unidades\",\"indicacoes\":[\"dor de garganta\",\"garganta\",\"tosse\"],\"contra\":[\"crianca menor de 6 anos\"],\"preco\":9.5,\"receita\":False,\"generico\":False},\n  {\"id\":\"P018\",\"nome\":\"Soro Fisiológico 0,9% 500ml\",\"indicacoes\":[\"nariz entupido\",\"congestão\",\"lavagem nasal\"],\"contra\":[],\"preco\":7.5,\"receita\":False,\"generico\":False},\n  {\"id\":\"P019\",\"nome\":\"Descongestionante nasal spray 30ml\",\"indicacoes\":[\"nariz entupido\",\"congestão\",\"resfriado\"],\"contra\":[\"hipertensao\",\"gestante\",\"uso por mais de 5 dias\"],\"preco\":17.5,\"receita\":False,\"generico\":False},\n  {\"id\":\"P020\",\"nome\":\"Vitamina C 1g 30 comprimidos efervescentes\",\"indicacoes\":[\"imunidade\",\"vitamina\",\"gripe\"],\"contra\":[\"calculo renal\"],\"preco\":24.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P021\",\"nome\":\"Vitamina D 2000UI 30 cápsulas\",\"indicacoes\":[\"vitamina\",\"ossos\",\"imunidade\"],\"contra\":[\"excesso de calcio no sangue\"],\"preco\":32.0,\"receita\":False,\"generico\":False},\n  {\"id\":\"P022\",\"nome\":\"Multivitamínico 60 comprimidos\",\"indicacoes\":[\"vitamina\",\"cansaço\",\"imunidade\"],\"contra\":[],\"preco\":38.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P023\",\"nome\":\"Protetor Solar FPS 60 200ml\",\"indicacoes\":[\"sol\",\"pele\",\"protetor solar\"],\"contra\":[\"alergia a componentes da formula\"],\"preco\":49.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P024\",\"nome\":\"Hidratante corporal 400ml\",\"indicacoes\":[\"pele seca\",\"hidratante\",\"pele\"],\"contra\":[],\"preco\":19.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P025\",\"nome\":\"Pomada para assaduras 45g\",\"indicacoes\":[\"assadura\",\"bebê\",\"pele irritada\"],\"contra\":[],\"preco\":14.5,\"receita\":False,\"generico\":False},\n  {\"id\":\"P026\",\"nome\":\"Repelente de insetos 100ml\",\"indicacoes\":[\"mosquito\",\"dengue\",\"repelente\"],\"contra\":[\"crianca menor de 6 meses\"],\"preco\":18.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P027\",\"nome\":\"Termômetro digital\",\"indicacoes\":[\"febre\",\"termômetro\"],\"contra\":[],\"preco\":29.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P028\",\"nome\":\"Curativo adesivo 40 unidades\",\"indicacoes\":[\"machucado\",\"corte\",\"curativo\"],\"contra\":[],\"preco\":8.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P029\",\"nome\":\"Álcool 70% 1 litro\",\"indicacoes\":[\"higiene\",\"antisséptico\"],\"contra\":[],\"preco\":9.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P030\",\"nome\":\"Amoxicilina 500mg 21 cápsulas\",\"indicacoes\":[\"infecção\"],\"contra\":[\"alergia a penicilina\"],\"preco\":32.0,\"receita\":True,\"generico\":True},\n  {\"id\":\"P031\",\"nome\":\"Azitromicina 500mg 3 comprimidos\",\"indicacoes\":[\"infecção\",\"garganta\"],\"contra\":[\"alergia a macrolideos\",\"doenca no figado\"],\"preco\":28.0,\"receita\":True,\"generico\":True},\n  {\"id\":\"P032\",\"nome\":\"Losartana 50mg 30 comprimidos\",\"indicacoes\":[\"pressão alta\",\"hipertensao\"],\"contra\":[\"gestante\"],\"preco\":12.0,\"receita\":True,\"generico\":True},\n  {\"id\":\"P033\",\"nome\":\"Metformina 850mg 30 comprimidos\",\"indicacoes\":[\"diabetes\"],\"contra\":[\"doenca nos rins\"],\"preco\":15.0,\"receita\":True,\"generico\":True},\n  {\"id\":\"P034\",\"nome\":\"Dorflex 36 comprimidos\",\"indicacoes\":[\"dor muscular\",\"dor nas costas\",\"tensão\"],\"contra\":[\"glaucoma\",\"gestante\",\"prostata aumentada\"],\"preco\":26.9,\"receita\":False,\"generico\":False},\n  {\"id\":\"P035\",\"nome\":\"Melatonina 0,21mg 30 comprimidos\",\"indicacoes\":[\"insônia\",\"sono\"],\"contra\":[\"gestante\",\"uso de anticoagulante\"],\"preco\":27.9,\"receita\":False,\"generico\":False},\n]\n\n# _query = texto que a IA envia (ex: \"dor de cabeça\")\nbusca = _query.lower().strip()\n\nachados = []\nfor p in PRODUTOS:\n    no_nome = busca in p[\"nome\"].lower()\n    na_indicacao = any(busca in ind or ind in busca for ind in p[\"indicacoes\"])\n    if no_nome or na_indicacao:\n        achados.append(p)\n\n# do mais barato para o mais caro\nachados.sort(key=lambda p: p[\"preco\"])\n\nif not achados:\n    return \"Nenhum produto encontrado.\"\n\nlinhas = []\nfor p in achados[:5]:\n    contra = \", \".join(p[\"contra\"]) if p[\"contra\"] else \"nenhuma\"\n    receita = \"SIM\" if p[\"receita\"] else \"não\"\n    linhas.append(\n        p[\"id\"] + \" | \" + p[\"nome\"] + \" | R$ \" + str(p[\"preco\"])\n        + \" | exige receita: \" + receita + \" | contraindicações: \" + contra\n    )\n\nreturn \"\\n\".join(linhas)\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolCode",
+      "typeVersion": 1.3,
+      "position": [
+        1040,
+        256
+      ],
+      "id": "1abe3dfb-3cf2-401b-99e9-23b77da8f0b4",
+      "name": "buscar_produtos"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "entrada = _query.strip()\nlinhas = []\ntotal = 0.0\n\nfor item in entrada.split(\",\"):\n    partes = item.strip().split(\":\")\n    if len(partes) != 3:\n        return \"Formato inválido. Use id:preco:quantidade, ex: P002:11.5:1\"\n    pid = partes[0].strip()\n    preco = float(partes[1].replace(\",\", \".\"))\n    qtd = int(partes[2])\n    subtotal = preco * qtd\n    total = total + subtotal\n    linhas.append(pid + \" | \" + str(qtd) + \" x R$ \" + str(round(preco, 2)) + \" = R$ \" + str(round(subtotal, 2)))\n\nreturn \"CARRINHO\\n\" + \"\\n\".join(linhas) + \"\\nTOTAL: R$ \" + str(round(total, 2)) + \"\\nPergunte se o cliente confirma. Se sim, termine com a linha: COMPRAR: \" + entrada"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolCode",
+      "typeVersion": 1.3,
+      "position": [
+        1040,
+        384
+      ],
+      "id": "98fa96bc-a332-4755-81c9-21a86034a580",
+      "name": "montar_carrinho"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "CLIENTES = {\n  \"C001\": {\"nome\": \"Maria\", \"alergias\": [\"dipirona\"], \"condicoes\": [\"gestante\"],\n           \"prefere_generico\": True, \"compras\": [\"P002 Paracetamol 750mg\", \"P020 Vitamina C 1g\"]},\n  \"C002\": {\"nome\": \"João\", \"alergias\": [], \"condicoes\": [\"hipertensao\"],\n           \"prefere_generico\": False, \"compras\": [\"P034 Dorflex\", \"P032 Losartana 50mg\"]},\n  \"C003\": {\"nome\": \"Ana\", \"alergias\": [], \"condicoes\": [],\n           \"prefere_generico\": True, \"compras\": [\"P008 Loratadina 10mg\", \"P018 Soro Fisiológico\"]},\n}\n\ncid = _query.strip().upper()\nc = CLIENTES.get(cid)\nif c is None:\n    return \"Cliente não identificado. Pergunte sobre alergias e gravidez normalmente.\"\n\nalergias = \", \".join(c[\"alergias\"]) if c[\"alergias\"] else \"nenhuma registrada\"\ncondicoes = \", \".join(c[\"condicoes\"]) if c[\"condicoes\"] else \"nenhuma registrada\"\nreturn (\"Nome: \" + c[\"nome\"] + \"\\nAlergias: \" + alergias + \"\\nCondições: \" + condicoes\n        + \"\\nPrefere genérico: \" + (\"sim\" if c[\"prefere_generico\"] else \"não\")\n        + \"\\nCompras anteriores: \" + \"; \".join(c[\"compras\"]))"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolCode",
+      "typeVersion": 1.3,
+      "position": [
+        1040,
+        128
+      ],
+      "id": "a4930ca9-cb05-4b16-a5bc-131990ac0918",
+      "name": "consultar_cliente"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chat",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0a01bdf6-b61f-442e-aeaa-a8a0cba53eee",
+      "name": "Webhook",
+      "webhookId": "17fd5e08-6695-4956-b486-6032bf70bc94"
+    },
+    {
+      "parameters": {
+        "language": "pythonNative",
+        "pythonCode": "dados = _items[0][\"json\"]\ncorpo = dados[\"body\"]\ntexto = corpo[\"message\"].lower()\n\ntermos = [\"dor no peito\", \"falta de ar\", \"desmaio\", \"desmaiei\", \"convuls\", \"overdose\", \"veneno\", \"suicid\", \"sangramento intenso\", \"inchaço na garganta\", \"rosto torto\", \"não consigo respirar\"]\n\nemergencia = any(t in texto for t in termos)\n\nreturn [{\"json\": {\n    \"chatInput\": corpo[\"message\"],\n    \"sessionId\": corpo[\"sessionId\"],\n    \"clienteId\": corpo.get(\"clienteId\", \"\"),\n    \"emergencia\": emergencia,\n    \"resposta\": \"⚠️ Isso pode ser uma emergência. Não posso recomendar produtos. Procure um pronto-atendimento. Em caso de intoxicação: CIATox 0800 722 6001.\"\n}}]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "03f36210-d174-4828-9588-00e2d972c50a",
+      "name": "filtro"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0a7513f1-f2c7-4c7c-ad07-3af6ebee2637",
+              "leftValue": "={{ $json.emergencia }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        0
+      ],
+      "id": "104ba675-0e19-4816-853e-1a42082e7b78",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"reply\": $json.output, \"emergencia\": false } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1184,
+        0
+      ],
+      "id": "5e30313e-5cf0-43ac-93e1-9f7e58cd83cc",
+      "name": "resposta_chat"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"reply\": $json.resposta, \"emergencia\": true } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        688,
+        -160
+      ],
+      "id": "2c3de8e8-8fcd-443a-ad80-54e98f38e897",
+      "name": "resposta_emergencia"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscar_produtos": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "montar_carrinho": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_cliente": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "filtro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "filtro": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "resposta_emergencia",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "resposta_chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "8eab00f2-39ba-4294-9c71-1f3e68afa954",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "14f71355f38b38782e3b86e45395968d8fd004cf4c04382db60966d50ff6f177"
+  },
+  "nodeGroups": [],
+  "id": "8SGNeDImFPaw2YZT",
+  "tags": []
+}
