@@ -1,6 +1,6 @@
 # Documentação do Banco de Dados: Chatbot Farmácia (IA Commerce)
 
-Este documento detalha o modelo de dados relacional projetado para o assistente virtual de IA da rede de farmácias. O banco de dados foi construído com compatibilidade para o **MySQL 8.0+**, utilizando chaves universais UUID (`CHAR(36)`), conformidade com a LGPD, catálogo hierárquico, especialização para medicamentos com suporte a RAG (busca semântica em bulas) e logística omnichannel.
+Este documento detalha o modelo de dados relacional projetado para o assistente virtual de IA da rede de farmácias. O banco de dados foi construído com compatibilidade para o **MySQL 8.0+**, utilizando chaves primárias e estrangeiras padronizadas em `VARCHAR(50)` (suportando UUIDs e códigos alfanuméricos), conformidade com a LGPD, catálogo hierárquico, especialização para medicamentos com suporte a RAG (busca semântica em bulas) e logística omnichannel.
 
 ---
 
@@ -34,7 +34,7 @@ erDiagram
     LOJA ||--o{ ESTOQUE_LOJA : "disponibiliza"
 
     USUARIO {
-        uuid id PK
+        varchar id PK
         string nome
         date data_nascimento
         string email UK
@@ -51,22 +51,22 @@ erDiagram
     }
 
     CONSENTIMENTO {
-        uuid id PK
-        uuid usuario_id FK
+        varchar id PK
+        varchar usuario_id FK
         string finalidade
         boolean aceito
         datetime registrado_em
     }
 
     PERFIL_SAUDE {
-        uuid usuario_id PK,FK
+        varchar usuario_id PK,FK
         text alergias_criptografadas
         text condicoes_criptografadas
         datetime atualizado_em
     }
 
     PREFERENCIA_USUARIO {
-        uuid usuario_id PK,FK
+        varchar usuario_id PK,FK
         json categorias_favoritas
         json marcas_favoritas
         decimal preco_minimo
@@ -77,15 +77,15 @@ erDiagram
     }
 
     ACESSO {
-        uuid id PK
-        uuid usuario_id FK
+        varchar id PK
+        varchar usuario_id FK
         datetime inicio
         string canal
     }
 
     CONVERSA {
-        uuid id PK
-        uuid usuario_id FK
+        varchar id PK
+        varchar usuario_id FK
         string titulo
         string status
         datetime iniciada_em
@@ -93,26 +93,26 @@ erDiagram
     }
 
     MENSAGEM {
-        uuid id PK
-        uuid conversa_id FK
+        varchar id PK
+        varchar conversa_id FK
         string papel
         text conteudo
         datetime enviada_em
     }
 
     CATEGORIA {
-        uuid id PK
-        uuid categoria_pai_id FK
+        varchar id PK
+        varchar categoria_pai_id FK
         string nome
     }
 
     PRODUTO {
-        uuid id PK
+        varchar id PK
         string ean UK
         string nome
         string marca
         text descricao
-        uuid categoria_id FK
+        varchar categoria_id FK
         string tipo
         decimal preco_atual
         boolean disponivel
@@ -121,14 +121,14 @@ erDiagram
     }
 
     PRINCIPIO_ATIVO {
-        uuid id PK
+        varchar id PK
         string nome UK
         string classe_terapeutica
     }
 
     MEDICAMENTO {
-        uuid produto_id PK,FK
-        uuid principio_ativo_id FK
+        varchar produto_id PK,FK
+        varchar principio_ativo_id FK
         string concentracao
         string forma_farmaceutica
         string tipo
@@ -138,8 +138,8 @@ erDiagram
     }
 
     BULA_SECAO {
-        uuid id PK
-        uuid medicamento_id FK
+        varchar id PK
+        varchar medicamento_id FK
         string tipo
         longtext texto
         string fonte
@@ -149,8 +149,8 @@ erDiagram
     }
 
     PEDIDO {
-        uuid id PK
-        uuid usuario_id FK
+        varchar id PK
+        varchar usuario_id FK
         datetime realizado_em
         decimal valor_total
         string status
@@ -159,16 +159,16 @@ erDiagram
     }
 
     ITEM_PEDIDO {
-        uuid id PK
-        uuid pedido_id FK
-        uuid produto_id FK
+        varchar id PK
+        varchar pedido_id FK
+        varchar produto_id FK
         int quantidade
         decimal preco_unitario
         string nome_produto_no_pedido
     }
 
     LOJA {
-        uuid id PK
+        varchar id PK
         string nome
         string endereco
         string cep
@@ -181,9 +181,9 @@ erDiagram
     }
 
     ESTOQUE_LOJA {
-        uuid id PK
-        uuid loja_id FK
-        uuid produto_id FK
+        varchar id PK
+        varchar loja_id FK
+        varchar produto_id FK
         int quantidade
         decimal preco_local
         datetime atualizado_em
@@ -231,7 +231,7 @@ O esquema é dividido em **6 módulos funcionais integrados**:
 #### `USUARIO`
 - **Função:** Tabela principal de clientes da farmácia.
 - **Campos Principais:**
-  - `id`: Identificador único UUID v4 (`CHAR(36)`).
+  - `id`: Identificador único padronizado (`VARCHAR(50)`, suportando UUIDs v4 e códigos alfanuméricos).
   - `email`: E-mail único para autenticação e contato.
   - `latitude` / `longitude`: Coordenadas do cliente para cálculo de distância da filial mais próxima e entrega rápida.
 - **Validações:** Validações `CHECK` que asseguram latitude entre -90 e 90, e longitude entre -180 e 180.

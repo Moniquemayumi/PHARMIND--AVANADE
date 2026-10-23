@@ -5,8 +5,8 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS MENSAGEM (
-  id CHAR(36) NOT NULL PRIMARY KEY,
-  conversa_id CHAR(36) NOT NULL,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  conversa_id VARCHAR(50) NOT NULL,
   papel VARCHAR(20) NOT NULL,
   conteudo TEXT NOT NULL,
   enviada_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

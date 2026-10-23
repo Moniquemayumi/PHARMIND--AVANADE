@@ -5,7 +5,7 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS PREFERENCIA_USUARIO (
-  usuario_id CHAR(36) NOT NULL PRIMARY KEY,
+  usuario_id VARCHAR(50) NOT NULL PRIMARY KEY,
   categorias_favoritas JSON NULL,
   marcas_favoritas JSON NULL,
   preco_minimo DECIMAL(10,2) NULL,

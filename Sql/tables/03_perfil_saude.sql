@@ -5,7 +5,7 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS PERFIL_SAUDE (
-  usuario_id CHAR(36) NOT NULL PRIMARY KEY,
+  usuario_id VARCHAR(50) NOT NULL PRIMARY KEY,
   alergias_criptografadas TEXT NULL,
   condicoes_criptografadas TEXT NULL,
   atualizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

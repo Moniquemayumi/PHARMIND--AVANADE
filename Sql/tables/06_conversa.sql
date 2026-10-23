@@ -5,8 +5,8 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS CONVERSA (
-  id CHAR(36) NOT NULL PRIMARY KEY,
-  usuario_id CHAR(36) NOT NULL,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  usuario_id VARCHAR(50) NOT NULL,
   titulo VARCHAR(200) NULL,
   status VARCHAR(30) NOT NULL DEFAULT 'ativa',
   iniciada_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

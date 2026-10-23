@@ -5,8 +5,8 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS ACESSO (
-  id CHAR(36) NOT NULL PRIMARY KEY,
-  usuario_id CHAR(36) NOT NULL,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  usuario_id VARCHAR(50) NOT NULL,
   inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   canal VARCHAR(40) NOT NULL,
   KEY idx_acesso_usuario_inicio (usuario_id, inicio),

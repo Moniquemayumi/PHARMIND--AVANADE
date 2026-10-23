@@ -5,8 +5,8 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS ESTOQUE_LOJA (
-  id CHAR(36) NOT NULL PRIMARY KEY,
-  loja_id CHAR(36) NOT NULL,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  loja_id VARCHAR(50) NOT NULL,
   produto_id VARCHAR(50) NOT NULL,
   quantidade INT NOT NULL DEFAULT 0,
   preco_local DECIMAL(10,2) NULL,

@@ -4,7 +4,7 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS USUARIO (
-  id CHAR(36) NOT NULL PRIMARY KEY,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
   nome VARCHAR(150) NOT NULL,
   data_nascimento DATE NULL,
   email VARCHAR(254) NOT NULL UNIQUE,

@@ -5,8 +5,8 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS PEDIDO (
-  id CHAR(36) NOT NULL PRIMARY KEY,
-  usuario_id CHAR(36) NOT NULL,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  usuario_id VARCHAR(50) NOT NULL,
   realizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   valor_total DECIMAL(12,2) NOT NULL DEFAULT 0.00,
   status VARCHAR(30) NOT NULL DEFAULT 'pendente',

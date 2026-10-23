@@ -5,8 +5,8 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS CONSENTIMENTO (
-  id CHAR(36) NOT NULL PRIMARY KEY,
-  usuario_id CHAR(36) NOT NULL,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  usuario_id VARCHAR(50) NOT NULL,
   finalidade VARCHAR(80) NOT NULL,
   aceito BOOLEAN NOT NULL,
   registrado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

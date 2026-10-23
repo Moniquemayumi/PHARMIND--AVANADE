@@ -5,7 +5,7 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS LOJA (
-  id CHAR(36) NOT NULL PRIMARY KEY,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
   nome VARCHAR(180) NOT NULL,
   endereco VARCHAR(255) NOT NULL,
   cep VARCHAR(12) NULL,

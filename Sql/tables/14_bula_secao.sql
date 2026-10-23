@@ -5,8 +5,8 @@
 -- =============================================================================
 
 CREATE TABLE IF NOT EXISTS BULA_SECAO (
-  id CHAR(36) NOT NULL PRIMARY KEY,
-  medicamento_id CHAR(36) NOT NULL,
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  medicamento_id VARCHAR(50) NOT NULL,
   tipo VARCHAR(100) NOT NULL,
   texto LONGTEXT NOT NULL,
   fonte VARCHAR(2048) NULL,

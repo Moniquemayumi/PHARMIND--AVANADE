@@ -6,7 +6,7 @@
 
 CREATE TABLE IF NOT EXISTS MEDICAMENTO (
   produto_id VARCHAR(50) NOT NULL PRIMARY KEY,
-  principio_ativo_id CHAR(36) NULL,
+  principio_ativo_id VARCHAR(50) NULL,
   concentracao VARCHAR(120) NULL,
   forma_farmaceutica VARCHAR(120) NULL,
   tipo VARCHAR(80) NULL,
