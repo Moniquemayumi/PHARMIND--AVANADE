@@ -1,6 +1,6 @@
 # Documentação do Banco de Dados: Chatbot Farmácia (IA Commerce)
 
-Este documento detalha o modelo de dados relacional projetado para o assistente virtual de IA da rede de farmácias (Pague Menos / Hackanade). O banco de dados foi construído com compatibilidade para o **MySQL 8.0+**, utilizando chaves universais UUID (`CHAR(36)`), conformidade com a LGPD, catálogo hierárquico, especialização para medicamentos com suporte a RAG (busca semântica em bulas) e logística omnichannel.
+Este documento detalha o modelo de dados relacional projetado para o assistente virtual de IA da rede de farmácias. O banco de dados foi construído com compatibilidade para o **MySQL 8.0+**, utilizando chaves universais UUID (`CHAR(36)`), conformidade com a LGPD, catálogo hierárquico, especialização para medicamentos com suporte a RAG (busca semântica em bulas) e logística omnichannel.
 
 ---
 
@@ -362,6 +362,8 @@ A tabela a seguir apresenta a ordem exata de dependências para criação segura
 Execute o script unificado a partir da pasta sql do projeto:
 
 ```bash
+cd sql/
+
 # Execução direta via terminal:
 mysql -u <usuario> -p < executar_todos.sql
 
