@@ -6,12 +6,12 @@ const path = require('node:path');
 
 test('páginas têm IDs únicos e referências locais de scripts e estilos válidas', () => {
   for (const file of ['index.html', 'login.html', 'sobre.html', 'ajuda.html']) {
-    const html = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
+    const html = fs.readFileSync(path.join(__dirname, '..', 'html', file), 'utf8');
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
     assert.ok(ids.length > 0);
     assert.equal(ids.length, new Set(ids).size, file);
     for (const match of html.matchAll(/(?:src|href)="([^"#]+\.(?:js|css))"/g)) {
-      assert.ok(fs.existsSync(path.join(__dirname, '..', match[1])), match[1]);
+      assert.ok(fs.existsSync(path.join(__dirname, '..', 'html', match[1])), match[1]);
     }
   }
 });
@@ -67,7 +67,7 @@ function environment(saved = {}, options = {}) {
   });
   context.window = context;
   const run = expression => vm.runInContext(expression, context);
-  const load = file => run(fs.readFileSync(path.join(__dirname, '..', file), 'utf8'));
+  const load = file => run(fs.readFileSync(path.join(__dirname, '..', 'js', file), 'utf8'));
   if (options.privacy) {
     context.performance = { getEntriesByType: () => [{ type: options.navigation || 'navigate' }] };
     load('privacy.js');
@@ -422,9 +422,9 @@ test('modo simplificado não perde o CEP nem o rascunho da mensagem', () => {
 
 test('ajuda usa o mesmo componente nas quatro páginas e não oferece atendimento fictício', () => {
   for (const file of ['index.html', 'sobre.html', 'ajuda.html', 'login.html']) {
-    const html = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
-    assert.match(html, /src="accessible-help.js"/);
-    assert.match(html, /href="accessible-flows.css"/);
+    const html = fs.readFileSync(path.join(__dirname, '..', 'html', file), 'utf8');
+    assert.match(html, /src="\.\.\/js\/accessible-help\.js"/);
+    assert.match(html, /href="\.\.\/css\/accessible-flows\.css"/);
   }
   const env = environment(); let panel;
   env.context.document.querySelector = () => ({ after(element) { panel = element; } });
@@ -432,7 +432,7 @@ test('ajuda usa o mesmo componente nas quatro páginas e não oferece atendiment
   assert.equal(panel.id, 'site-help');
   assert.match(panel.innerHTML, /Preciso de ajuda/);
   assert.match(panel.innerHTML, /ajuda.html#atendimento-humano/);
-  const help = fs.readFileSync(path.join(__dirname, '..', 'ajuda.html'), 'utf8');
+  const help = fs.readFileSync(path.join(__dirname, '..', 'html', 'ajuda.html'), 'utf8');
   assert.match(help, /consulte os canais disponíveis na central oficial/);
   assert.match(help, /https:\/\/www.paguemenos.com.br\/central-de-atendimento/);
 });
@@ -557,7 +557,7 @@ test('inicialização visual não sobrescreve carrinho privado antes de validar 
 
 test('textos públicos não apresentam o site como protótipo ou demonstração', () => {
   const marker = /\b(?:protótipo|prototipo|demonstração|demonstracao|demonstrativo|demonstrativa|simulado|simulada|simular)\b/i;
-  for (const file of ['index.html', 'sobre.html', 'ajuda.html', 'login.html', 'purchase-chat.js', 'script.js', 'auth.js', 'accessible-help.js']) {
+  for (const file of ['html/index.html', 'html/sobre.html', 'html/ajuda.html', 'html/login.html', 'js/purchase-chat.js', 'js/script.js', 'js/auth.js', 'js/accessible-help.js']) {
     const source = fs.readFileSync(path.join(__dirname, '..', file), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
     assert.doesNotMatch(source, marker, file);
   }
@@ -591,7 +591,7 @@ test('busca normaliza acentos, preserva as fotos e limpa resultados antigos quan
   const input = env.element('campo-busca'); input.value = 'dipirona';
   const grid = env.element('products-grid-container'); env.element('products-active-filter-label');
   env.context.buscarProduto();
-  assert.match(grid.innerHTML, /assets\/produtos\/med-02.png/);
+  assert.match(grid.innerHTML, /\.\.\/css\/assets\/produtos\/med-02\.png/);
   assert.doesNotMatch(grid.innerHTML, /Foto oficial|role="button"/);
   assert.match(grid.innerHTML, /button type="button" class="product-image-box"/);
   input.value = 'produto inexistente xyz'; env.context.buscarProduto();
@@ -705,7 +705,7 @@ test('Todas as categorias apresenta o catálogo inteiro e favoritos expõem seu 
 });
 
 test('atalhos não confundem acompanhamento com pagamento e menu usa navegação nativa', () => {
-  const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, '..', 'html', 'index.html'), 'utf8');
   assert.match(html, /href="ajuda.html#assistente-ia">Acompanhar pedido/);
   assert.doesNotMatch(html, /href="(?:index.html)?#lojas"/);
   assert.doesNotMatch(html, /role="menubar"|role="menuitem"/);

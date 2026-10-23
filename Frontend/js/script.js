@@ -13,7 +13,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 842,
     isDestaque: true,
     isMedicamento: true,
-    imagem: 'assets/produtos/med-01.jpg',
+    imagem: '../css/assets/produtos/med-01.jpg',
     avisoReceita: 'Medicamento isento de prescrição médica (MIP). Indicado para dor e relaxamento muscular.',
     descricao: 'Indicado no alívio da dor associada a contraturas musculares decorrentes de processos traumáticos ou inflamatórios.',
     modoUso: 'Tomar de 1 a 2 comprimidos, de 3 a 4 vezes ao dia. Não ultrapassar o limite diário recomendado na bula.'
@@ -30,7 +30,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 960,
     isDestaque: true,
     isMedicamento: true,
-    imagem: 'assets/produtos/med-02.png',
+    imagem: '../css/assets/produtos/med-02.png',
     avisoReceita: 'Medicamento genérico isento de prescrição médica (MIP). Analgésico e antitérmico.',
     descricao: 'Eficaz no alívio de dores de intensidade leve a moderada e redução de estados febris em adultos e adolescentes.',
     modoUso: 'Ingerir 1 comprimido com água em caso de dor ou febre, respeitando o intervalo mínimo de 6 horas.'
@@ -47,7 +47,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 730,
     isDestaque: false,
     isMedicamento: true,
-    imagem: 'assets/produtos/med-03.jpg',
+    imagem: '../css/assets/produtos/med-03.jpg',
     avisoReceita: 'Medicamento isento de prescrição médica (MIP). Alívio rápido para cefaleias.',
     descricao: 'Medicamento com ação analgésica e antiespasmódica, desenvolvido para combater dores de cabeça e crises de enxaqueca.',
     modoUso: 'Tomar 1 a 2 drágeas em dose única a cada 6 horas se persistir a dor. Não mastigar as drágeas.'
@@ -64,7 +64,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 410,
     isDestaque: false,
     isMedicamento: true,
-    imagem: 'assets/produtos/med-04.jpg',
+    imagem: '../css/assets/produtos/med-04.jpg',
     avisoReceita: 'Medicamento isento de prescrição médica (MIP). Sintomas de gripes e resfriados.',
     descricao: 'Tratamento dos sintomas gripais, como coriza, febre, congestão nasal e dores musculares generalizadas.',
     modoUso: 'Adultos de 18 a 60 anos: 1 cápsula a cada 4 horas. Não exceder 4 cápsulas em 24 horas.'
@@ -81,7 +81,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 310,
     isDestaque: false,
     isMedicamento: true,
-    imagem: 'assets/produtos/med-05.jpg',
+    imagem: '../css/assets/produtos/med-05.jpg',
     avisoReceita: 'Consulte a bula e peça orientação ao farmacêutico antes de usar.',
     descricao: 'Fórmula padrão para alívio de desconfortos musculares e dores de cabeça ocasionais.',
     modoUso: 'Conforme instruções da embalagem oficial.'
@@ -99,7 +99,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 208,
     isDestaque: true,
     isMedicamento: false,
-    imagem: 'assets/produtos/pel-01.jpg',
+    imagem: '../css/assets/produtos/pel-01.jpg',
     descricao: 'Hidratação profunda por 48 horas com fórmula hipoalergênica para peles secas e sensíveis.',
     modoUso: 'Espalhar por todo o corpo massageando suavemente, especialmente após o banho.'
   },
@@ -115,7 +115,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 127,
     isDestaque: true,
     isMedicamento: false,
-    imagem: 'assets/produtos/pel-02.png',
+    imagem: '../css/assets/produtos/pel-02.png',
     descricao: 'Proteção contra raios solares UVA/UVB e prevenção de ressecamento labial com manteiga de cacau.',
     modoUso: 'Aplicar uniformemente sobre os lábios sempre que necessário ou antes da exposição solar.'
   },
@@ -131,7 +131,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 520,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/pel-03.png',
+    imagem: '../css/assets/produtos/pel-03.png',
     descricao: 'Toque seco imediato, textura fluida e tecnologia que controla a oleosidade por até 12 horas.',
     modoUso: 'Aplicar abundantemente sobre a pele seca 30 minutos antes da exposição ao sol.'
   },
@@ -147,7 +147,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 680,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/pel-04.jpg',
+    imagem: '../css/assets/produtos/pel-04.jpg',
     descricao: 'Com 3 ceramidas essenciais e ácido hialurônico. Restaura a barreira protetora da pele.',
     modoUso: 'Aplicar generosamente na pele sempre que sentir necessidade de hidratação.'
   },
@@ -163,7 +163,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 340,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/pel-05.jpg',
+    imagem: '../css/assets/produtos/pel-05.jpg',
     descricao: 'Dexpantenol puro em fórmula oil-free para hidratação intensiva e rápida absorção facial.',
     modoUso: 'Aplicar uma fina camada sobre o rosto limpo pela manhã e à noite.'
   },
@@ -180,7 +180,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 312,
     isDestaque: true,
     isMedicamento: false,
-    imagem: 'assets/produtos/hig-01.jpg',
+    imagem: '../css/assets/produtos/hig-01.jpg',
     descricao: 'Fórmula hidratante com pH neutro que limpa suavemente sem ressecar a pele.',
     modoUso: 'Aplicar durante o banho sobre a pele úmida até formar espuma suave e enxaguar em seguida.'
   },
@@ -196,7 +196,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 590,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/hig-02.jpg',
+    imagem: '../css/assets/produtos/hig-02.jpg',
     descricao: 'Proteção avançada 3x mais eficaz contra o suor e o odor, ideal para o dia a dia ativo.',
     modoUso: 'Agitar bem antes de usar e aplicar a 15 cm das axilas por cerca de 2 segundos.'
   },
@@ -212,7 +212,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 440,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/hig-03.jpg',
+    imagem: '../css/assets/produtos/hig-03.jpg',
     descricao: 'Tecnologia com Pro-Vitaminas que repara os danos causados por químicas e calor desde o 1º uso.',
     modoUso: 'Massagear sobre os cabelos molhados até espumar e enxaguar bem.'
   },
@@ -229,7 +229,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 541,
     isDestaque: true,
     isMedicamento: false,
-    imagem: 'assets/produtos/buc-01.png',
+    imagem: '../css/assets/produtos/buc-01.png',
     descricao: 'Cerdas ultramacias com pontas arredondadas que protegem a gengiva e removem a placa bacteriana.',
     modoUso: 'Escovar os dentes 3 vezes ao dia após as refeições ou conforme orientação do dentista.'
   },
@@ -245,7 +245,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 810,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/buc-02.jpg',
+    imagem: '../css/assets/produtos/buc-02.jpg',
     descricao: 'Até 12 horas de defesa antibacteriana contra placa, gengivite, tártaro e mau hálito.',
     modoUso: 'Escovar cuidadosamente após cada refeição pelo menos duas vezes ao dia.'
   },
@@ -261,7 +261,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 620,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/buc-03.jpg',
+    imagem: '../css/assets/produtos/buc-03.jpg',
     descricao: 'Mata até 99,9% dos germes que causam placa e mau hálito com sabor refrescante de menta.',
     modoUso: 'Bochechar 20ml por 30 segundos pela manhã e à noite. Não engolir.'
   },
@@ -277,7 +277,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 490,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/buc-04.jpg',
+    imagem: '../css/assets/produtos/buc-04.jpg',
     descricao: 'Fio resistente que não desfia e desliza suavemente entre os dentes sem machucar a gengiva.',
     modoUso: 'Cortar cerca de 40 cm e passar suavemente entre os espaços interdentais.'
   },
@@ -294,7 +294,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 920,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/beb-01.jpg',
+    imagem: '../css/assets/produtos/beb-01.jpg',
     descricao: 'Com canais de ar que mantêm o bebê sequinho por até 12 horas de sono tranquilo.',
     modoUso: 'Posicionar o bebê e prender as fitas elásticas sem apertar o abdômen.'
   },
@@ -310,7 +310,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 580,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/beb-02.jpg',
+    imagem: '../css/assets/produtos/beb-02.jpg',
     descricao: 'Limpam e refrescam suavemente, sem álcool, corantes ou parabenos.',
     modoUso: 'Puxar pela abertura adesiva e higienizar a pele a cada troca.'
   },
@@ -326,7 +326,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 410,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/beb-03.jpg',
+    imagem: '../css/assets/produtos/beb-03.jpg',
     descricao: 'Barreira protetora imediata enriquecida com óxido de zinco para prevenir assaduras.',
     modoUso: 'Aplicar a cada troca de fralda após limpar e secar a pele do bebê.'
   },
@@ -343,7 +343,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 870,
     isDestaque: true,
     isMedicamento: false,
-    imagem: 'assets/produtos/vit-01.jpg',
+    imagem: '../css/assets/produtos/vit-01.jpg',
     descricao: 'Suplemento vitamínico e mineral diário que fornece energia, imunidade e disposição.',
     modoUso: 'Ingerir 1 comprimido ao dia com água, de preferência junto à principal refeição.'
   },
@@ -359,7 +359,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 430,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/vit-02.jpg',
+    imagem: '../css/assets/produtos/vit-02.jpg',
     descricao: 'Rico em biotina, zinco e vitamina B6 para fortalecimento capilar e unhas mais resistentes.',
     modoUso: 'Tomar 1 cápsula ao dia. Não engorda e não contém açúcar.'
   },
@@ -375,7 +375,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 650,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/vit-03.jpg',
+    imagem: '../css/assets/produtos/vit-03.jpg',
     descricao: 'Dose potente de vitamina C para reforço rápido das defesas naturais do organismo.',
     modoUso: 'Dissolver 1 comprimido em 200 ml de água filtrada uma vez ao dia.'
   },
@@ -391,7 +391,7 @@ const CATALOGO_PRODUTOS = [
     avaliacoesTotal: 390,
     isDestaque: false,
     isMedicamento: false,
-    imagem: 'assets/produtos/vit-04.jpg',
+    imagem: '../css/assets/produtos/vit-04.jpg',
     descricao: 'Fórmula completa e balanceada que complementa a alimentação com micronutrientes essenciais.',
     modoUso: 'Ingerir 1 comprimido ao dia acompanhado de líquidos.'
   }
@@ -686,11 +686,11 @@ function renderizarProdutosVitrine(categoriaId, resultadosBusca = null) {
 
         <button type="button" class="product-image-box" onclick="abrirDetalheProduto('${produto.nome}')" aria-label="Ver detalhes de ${produto.nome}">
           <img 
-            src="${produto.imagem || 'assets/produto-sem-foto.svg'}" 
+            src="${produto.imagem || '../css/assets/produto-sem-foto.svg'}" 
             alt="" 
             class="product-card-img" 
             loading="lazy"
-            onerror="this.onerror=null; this.src='assets/produto-sem-foto.svg';"
+            onerror="this.onerror=null; this.src='../css/assets/produto-sem-foto.svg';"
           >
         </button>
 
@@ -1145,7 +1145,7 @@ function abrirDetalheProduto(nomeProduto) {
   body.innerHTML = `
     <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 16px;">
       <div style="width: 140px; height: 140px; background-color: #FFF; border: 1px solid var(--color-border); border-radius: 8px; display: flex; align-items: center; justify-content: center; padding: 8px; flex-shrink: 0;">
-        <img src="${produto.imagem || 'assets/produto-sem-foto.svg'}" alt="${produto.nome}" onerror="this.onerror=null; this.src='assets/produto-sem-foto.svg';" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+        <img src="${produto.imagem || '../css/assets/produto-sem-foto.svg'}" alt="${produto.nome}" onerror="this.onerror=null; this.src='../css/assets/produto-sem-foto.svg';" style="max-width: 100%; max-height: 100%; object-fit: contain;">
       </div>
       <div>
         <div class="prod-badge-tag">${produto.categoriaNome}</div>

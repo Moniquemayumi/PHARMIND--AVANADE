@@ -39,3 +39,19 @@ Front-end desenvolvido com foco em acessibilidade e meta de verificação **WCAG
 8. **Assistente Virtual Interativo com IA**:
    - Chatbot acessível com sugestões rápidas, busca guiada e orientações por assunto e fluxo de compra guiado.
 
+---
+
+## Estrutura do Projeto
+
+O projeto está organizado na seguinte estrutura:
+
+```
+Frontend/
+├── html/         # Arquivos HTML da aplicação (index.html, login.html, ajuda.html, sobre.html)
+├── css/          # Folhas de estilo (styles.css, accessible-flows.css)
+│   └── assets/   # Imagens, logotipos, ícones e fotos de produtos
+├── js/           # Scripts JavaScript (script.js, purchase-chat.js, auth.js, etc.)
+├── Docs/         # Documentações do projeto em Markdown
+└── tests/        # Testes automatizados de contraste e fluxo de compra
+```
+
