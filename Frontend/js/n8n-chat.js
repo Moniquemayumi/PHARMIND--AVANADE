@@ -1,7 +1,7 @@
 
 (() => {
   // SUBSTITUA pela URL do Webhook do seu workflow n8n.
-  const N8N_WEBHOOK_URL = 'COLE_AQUI_A_URL_DO_WEBHOOK';
+  const N8N_WEBHOOK_URL = 'http://100.125.19.11:5678/webhook/chat';
 
   window.enviarMensagemChat = async function () {
     const input = document.getElementById('chat-input');
