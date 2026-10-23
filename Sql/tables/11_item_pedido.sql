@@ -6,8 +6,8 @@
 
 CREATE TABLE IF NOT EXISTS ITEM_PEDIDO (
   id CHAR(36) NOT NULL PRIMARY KEY,
-  pedido_id CHAR(36) NOT NULL,
-  produto_id CHAR(36) NOT NULL,
+  pedido_id VARCHAR(36) NOT NULL,
+  produto_id VARCHAR(50) NOT NULL,
   quantidade INT NOT NULL,
   preco_unitario DECIMAL(10,2) NOT NULL,
   nome_produto_no_pedido VARCHAR(200) NULL,
