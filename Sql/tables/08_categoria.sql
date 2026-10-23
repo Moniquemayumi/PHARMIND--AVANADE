@@ -10,6 +10,5 @@ CREATE TABLE IF NOT EXISTS CATEGORIA (
   nome VARCHAR(120) NOT NULL,
   UNIQUE KEY uq_categoria_pai_nome (categoria_pai_id, nome),
   CONSTRAINT fk_categoria_pai FOREIGN KEY (categoria_pai_id) REFERENCES CATEGORIA(id)
-    ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT chk_categoria_autoreferencia CHECK (id <> categoria_pai_id)
+    ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB;
