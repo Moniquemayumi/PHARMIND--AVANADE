@@ -36,12 +36,24 @@
         <h2>Acessar minha conta</h2>
         <form id="login-form" onsubmit="PMAuth.login(event)">
           <div class="form-group"><label class="form-label" for="auth-email">E-mail</label><input class="form-input" type="email" id="auth-email" autocomplete="username" inputmode="email" required></div>
-          <div class="form-group"><label class="form-label" for="auth-password">Senha</label><input class="form-input" type="password" id="auth-password" autocomplete="current-password" aria-describedby="password-help" required><p id="password-help">Para criar uma conta, use pelo menos 8 caracteres.</p></div>
+          <div class="form-group"><label class="form-label" for="auth-password">Senha</label><input class="form-input" type="password" id="auth-password" autocomplete="current-password" required></div>
           <label class="login-check"><input type="checkbox" onchange="document.getElementById('auth-password').type = this.checked ? 'text' : 'password'"> Mostrar senha</label>
           <button type="submit" class="btn btn-primary btn-block" data-auth-action>Entrar e continuar</button>
-          <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.signup()">Criar conta com e-mail</button>
+          <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.showSignup(true)">Criar minha conta</button>
           <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.google()">Continuar com Google</button>
           <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.resetPassword()">Esqueci minha senha</button>
+        </form>
+      </div>
+      <div id="signup-panel" hidden>
+        <h2 id="signup-title" tabindex="-1">Criar minha conta</h2>
+        <form id="signup-form" onsubmit="PMAuth.signup(event)">
+          <div class="form-group"><label class="form-label" for="signup-name">Nome</label><input class="form-input" id="signup-name" autocomplete="name" maxlength="150" required></div>
+          <div class="form-group"><label class="form-label" for="signup-email">E-mail</label><input class="form-input" type="email" id="signup-email" autocomplete="email" inputmode="email" required></div>
+          <div class="form-group"><label class="form-label" for="signup-password">Senha</label><input class="form-input" type="password" id="signup-password" autocomplete="new-password" minlength="8" aria-describedby="signup-password-help" required><p id="signup-password-help">Use pelo menos 8 caracteres.</p></div>
+          <div class="form-group"><label class="form-label" for="signup-confirm">Repita a senha</label><input class="form-input" type="password" id="signup-confirm" autocomplete="new-password" required></div>
+          <p>Seu nome e e-mail serão usados para identificar sua conta.</p>
+          <button type="submit" class="btn btn-primary btn-block" data-auth-action>Criar conta</button>
+          <button type="button" class="btn btn-secondary btn-block" data-auth-action onclick="PMAuth.showSignup(false)">Já tenho conta</button>
         </form>
       </div>
       <div id="account-panel" hidden>

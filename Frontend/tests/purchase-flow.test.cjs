@@ -93,6 +93,53 @@ function click(button) { assert.ok(button, 'Botão esperado existe'); return (bu
 function send(env, text) { env.elements.get('guided-input').value = text; env.elements.get('guided-form').onsubmit({ preventDefault() {} }); }
 function chat(env) { env.load('purchase-chat.js'); env.context.PMChat.open(); return env.elements.get('guided-actions'); }
 
+function signupEnvironment() {
+  const env = environment();
+  for (const id of ['signup-form', 'signup-panel', 'signup-title', 'login-panel', 'login-form', 'account-panel', 'auth-status', 'auth-email', 'auth-password', 'signup-name', 'signup-email', 'signup-password', 'signup-confirm']) env.element(id);
+  const calls = [];
+  env.context.PM_AUTH_CONFIG = { supabaseUrl: 'https://example.supabase.co', supabasePublicKey: 'public-test' };
+  env.context.supabase = { createClient: () => ({ auth: {
+    onAuthStateChange() {}, getUser: async () => ({ data: { user: null } }),
+    signUp: async data => { calls.push(data); return { data: { session: null }, error: null }; }
+  } }) };
+  env.elements.get('signup-name').value = ' Maria Silva ';
+  env.elements.get('signup-email').value = ' maria@example.com ';
+  env.elements.get('signup-password').value = 'senha-de-teste';
+  env.elements.get('signup-confirm').value = 'senha-de-teste';
+  env.load('auth.js');
+  return { ...env, calls };
+}
+
+test('cadastro envia nome e credenciais próprios e pede confirmação de e-mail', async () => {
+  const env = signupEnvironment(); await env.context.PMAuth.ready;
+  env.context.PMAuth.showSignup(true);
+  assert.equal(env.elements.get('signup-panel').hidden, false);
+  assert.equal(env.elements.get('login-panel').hidden, true);
+  await env.context.PMAuth.signup({ preventDefault() {} });
+  assert.equal(env.calls.length, 1);
+  assert.equal(env.calls[0].email, 'maria@example.com');
+  assert.equal(env.calls[0].password, 'senha-de-teste');
+  assert.equal(env.calls[0].options.data.full_name, 'Maria Silva');
+  assert.equal(env.elements.get('signup-password').value, '');
+  assert.equal(env.elements.get('signup-confirm').value, '');
+  assert.match(env.elements.get('auth-status').textContent, /confirmar a conta/);
+  assert.equal(env.run('appState.usuario.autenticado'), false);
+  assert.equal(env.elements.get('login-panel').hidden, false);
+});
+
+test('cadastro rejeita senha curta, confirmação diferente e nome em branco sem chamar servidor', async () => {
+  const env = signupEnvironment(); await env.context.PMAuth.ready;
+  const submit = () => env.context.PMAuth.signup({ preventDefault() {} });
+  env.elements.get('signup-password').value = 'curta'; await submit();
+  assert.equal(env.context.document.activeElement.id, 'signup-password');
+  env.elements.get('signup-password').value = 'senha-de-teste';
+  env.elements.get('signup-confirm').value = 'outra-senha'; await submit();
+  assert.equal(env.context.document.activeElement.id, 'signup-confirm');
+  env.elements.get('signup-name').value = '  '; await submit();
+  assert.equal(env.context.document.activeElement.id, 'signup-name');
+  assert.equal(env.calls.length, 0);
+});
+
 test('visitante não conclui nem esvazia carrinho; retorno preserva origem', async () => {
   const env = environment(); env.load('auth-config.js'); env.load('auth.js');
   const count = env.run('appState.carrinho.length');

@@ -6,10 +6,12 @@ Abra o projeto com Live Server ou outro servidor HTTP local. O Google OAuth prec
 
 1. Crie um projeto Supabase e ative autenticação por e-mail/senha. Mantenha a confirmação de e-mail habilitada.
 2. Em Authentication → URL Configuration, configure a Site URL e permita o endereço exato de `login.html` em desenvolvimento e produção.
-3. Em Authentication → Providers → Google, habilite Google e configure o cliente OAuth criado no Google Cloud. No Google Cloud, autorize a URL de callback indicada pelo Supabase (`https://SEU-PROJETO.supabase.co/auth/v1/callback`). O segredo do Google fica somente no painel Supabase.
-4. Ative o vínculo manual de identidades nas configurações de Authentication para permitir “Vincular minha conta ao Google”.
+3. Opcional, para oferecer Google além de e-mail/senha: em Authentication → Providers → Google, habilite Google e configure o cliente OAuth criado no Google Cloud. No Google Cloud, autorize a URL de callback indicada pelo Supabase (`https://SEU-PROJETO.supabase.co/auth/v1/callback`). O segredo do Google fica somente no painel Supabase.
+4. Opcional, para permitir “Vincular minha conta ao Google”: ative o vínculo manual de identidades nas configurações de Authentication.
 5. Preencha apenas `supabaseUrl` e `supabasePublicKey` em `auth-config.js`. Use a chave publishable ou anon pública, nunca `service_role`, chave secreta ou segredo do Google.
 6. Configure o envio de e-mail do projeto para confirmação de conta e recuperação de senha.
+
+O cadastro por e-mail tem formulário próprio com nome, e-mail, senha e confirmação de senha. O nome é enviado como `user_metadata.full_name` no Supabase Auth; isso ainda não cria um perfil na tabela USUARIO do MySQL. Senhas divergentes, senhas menores que oito caracteres e nomes em branco são rejeitados antes do envio. Após o cadastro, o cliente recebe orientação para confirmar o e-mail; só há entrada automática quando o serviço devolve uma sessão e a verificação remota confirma o usuário.
 
 Sem essa configuração, a página informa que o login está em preparação e nenhuma compra é concluída. Não há login fictício ou senha armazenada pelo código do site. O SDK gerencia a sessão na aba (`sessionStorage`), e `getUser()` verifica a conta antes da confirmação. Carrinho e CEP ficam na aba, separados pela identidade; sair ou trocar de conta limpa os dados privados anteriores. Recarregar reinicia etapas e conversa; o retorno deliberado do login pode retomar a etapa. Consulte [PRIVACIDADE.md](PRIVACIDADE.md).
 

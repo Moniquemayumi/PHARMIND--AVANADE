@@ -2,6 +2,9 @@
 window.PMAuth = (() => {
   let client;
   let user = null;
+  let creatingAccount = false;
+  let recoveringPassword = false;
+  let busy = false;
   const storage = {
     get(key) { try { return purchaseStorage.getItem(key); } catch { return null; } },
     set(key, value) { try { purchaseStorage.setItem(key, value); } catch {} },
@@ -30,8 +33,10 @@ window.PMAuth = (() => {
     atualizarDadosUsuarioUI();
     const account = document.getElementById('account-panel');
     const form = document.getElementById('login-panel');
-    if (account) account.hidden = !user;
-    if (form) form.hidden = Boolean(user);
+    if (account) account.hidden = !user || recoveringPassword;
+    if (form) form.hidden = Boolean(user) || creatingAccount || recoveringPassword;
+    const signupPanel = document.getElementById('signup-panel');
+    if (signupPanel) signupPanel.hidden = Boolean(user) || !creatingAccount || recoveringPassword;
     const name = document.getElementById('account-name');
     if (name) name.textContent = appState.usuario.nome;
     const linked = Boolean(user?.identities?.some(identity => identity.provider === 'google'));
@@ -65,13 +70,15 @@ window.PMAuth = (() => {
     await ready;
     if (!client) { message('O login ainda não está disponível. Você pode continuar navegando; a conclusão da compra exige uma conta conectada.', true); return; }
     const form = document.getElementById('login-form');
-    if (form?.getAttribute('aria-busy') === 'true') return;
+    if (busy) return;
+    busy = true;
     if (form) form.setAttribute('aria-busy', 'true');
     document.querySelectorAll('[data-auth-action]').forEach(button => { button.disabled = true; });
     message('Aguarde, conectando sua conta…');
     try { await action(); }
     catch { message('Não foi possível conectar. Confira seus dados e sua conexão e tente novamente.', true); }
     finally {
+      busy = false;
       if (form) form.setAttribute('aria-busy', 'false');
       document.querySelectorAll('[data-auth-action]').forEach(button => { button.disabled = false; });
       syncUser(user);
@@ -89,23 +96,46 @@ window.PMAuth = (() => {
       if (await verify()) continuePurchase();
     });
   }
-  async function signup() {
-    const form = document.getElementById('login-form');
+  function showSignup(show) {
+    if (busy) return;
+    creatingAccount = show;
+    syncUser(user);
+    document.getElementById(show ? 'signup-title' : 'auth-email')?.focus();
+    message(show ? 'Preencha seus dados para criar sua conta.' : 'Entre com seu e-mail e senha.');
+  }
+  async function signup(event) {
+    event?.preventDefault();
+    const form = document.getElementById('signup-form');
     if (!form.reportValidity()) return;
-    const password = document.getElementById('auth-password');
+    const name = document.getElementById('signup-name');
+    if (!name.value.trim()) { message('Informe seu nome.', true); name.focus(); return; }
+    const password = document.getElementById('signup-password');
     if (password.value.length < 8) {
       password.setAttribute('aria-invalid', 'true');
       message('Para criar uma conta, use uma senha com pelo menos 8 caracteres.', true);
       password.focus(); return;
     }
     password.removeAttribute('aria-invalid');
+    const confirm = document.getElementById('signup-confirm');
+    if (password.value !== confirm.value) {
+      confirm.setAttribute('aria-invalid', 'true');
+      message('As senhas precisam ser iguais. Confira e tente novamente.', true);
+      confirm.focus(); return;
+    }
+    confirm.removeAttribute('aria-invalid');
     await run(async () => {
-      const { error } = await client.auth.signUp({
-        email: document.getElementById('auth-email').value.trim(),
-        password: document.getElementById('auth-password').value,
-        options: { emailRedirectTo: new URL('login.html', location.href).href }
+      const email = document.getElementById('signup-email').value.trim();
+      const { data, error } = await client.auth.signUp({
+        email,
+        password: password.value,
+        options: { emailRedirectTo: new URL('login.html', location.href).href,
+          data: { full_name: name.value.trim() } }
       });
       if (error) { message('Não foi possível criar a conta. Use uma senha com pelo menos 8 caracteres ou tente recuperar seu acesso.', true); return; }
+      password.value = ''; confirm.value = '';
+      creatingAccount = false;
+      document.getElementById('auth-email').value = email;
+      if (data?.session && await verify()) { continuePurchase(); return; }
       message('Solicitação recebida. Confira seu e-mail para confirmar a conta e depois entre com sua senha.');
     });
   }
@@ -136,6 +166,8 @@ window.PMAuth = (() => {
       const { error } = await client.auth.updateUser({ password: document.getElementById('new-password').value });
       if (error) { message('Não foi possível atualizar a senha. Solicite um novo link de recuperação.', true); return; }
       document.getElementById('recovery-panel').hidden = true;
+      recoveringPassword = false;
+      document.getElementById('new-password').value = '';
       message('Senha atualizada. Você já pode continuar sua compra.');
     });
   }
@@ -194,6 +226,8 @@ window.PMAuth = (() => {
       client.auth.onAuthStateChange((event, session) => {
         syncUser(session?.user || null);
         if (event === 'PASSWORD_RECOVERY') {
+          recoveringPassword = true;
+          syncUser(session?.user || null);
           const panel = document.getElementById('recovery-panel');
           if (panel) { panel.hidden = false; document.getElementById('new-password').focus(); }
         }
@@ -235,5 +269,5 @@ window.PMAuth = (() => {
       if (status) status.textContent = 'Não foi possível sair da conta agora. Confira sua conexão e tente novamente.';
     }
   }
-  return { ready, verify, requireLogin, goToLogin, login, signup, google, resetPassword, updatePassword, logout, continuePurchase, storage, clearLocalData };
+  return { ready, verify, requireLogin, goToLogin, login, signup, showSignup, google, resetPassword, updatePassword, logout, continuePurchase, storage, clearLocalData };
 })();
