@@ -108,10 +108,10 @@ Cada parte do protótipo pode ser substituída por um sistema real, sem refazer 
 
 ## Equipe
 
-- Nome 1
-- Nome 2
-- Nome 3
-- Nome 4
+- Monique Mayumi Yazawa
+- João Pedro Pereira Barbosa
+- Garret Leonardo da Silva
+- Thomas Anderson de Melo Silva
 
 ---
 
