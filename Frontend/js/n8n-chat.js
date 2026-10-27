@@ -54,7 +54,7 @@
           body: JSON.stringify({
             message: texto,
             sessionId: obterSessionId(),
-            clienteId: 'C001'
+            clienteId: 'C005'
           }),
           signal: controller.signal
         });
@@ -90,19 +90,20 @@
       if (mensagemLimpa === respostaGenerica) {
         throw new Error('Resposta genérica do n8n; usando o chatbot local.');
       }
-      const textoVisivel = mensagem.replace(/COMPRAR:.*$/m, '').trim() || mensagem.trim();
-      window.adicionarBolhaChat(textoVisivel, 'bot');
-      respostaRecebida = true;
+      const compra = mensagem.match(/\**COMPRAR:\**\s*(.+)$/mi);
+      let textoVisivel = mensagem.replace(/^.*COMPRAR:.*$/gmi, '').trim();
 
-      // Linha "COMPRAR: id:preco:qtd,id:preco:qtd" enviada pelo agente = adiciona ao carrinho do site
-      const compra = mensagem.match(/COMPRAR:\s*(.+)$/m);
       if (compra && typeof window.adicionarAoCarrinho === 'function') {
         compra[1].split(',').forEach(item => {
-          const [id, , qtd] = item.trim().split(':');
+          const [id, , qtd] = item.replace(/\*/g, '').trim().split(':');
           const vezes = Math.min(parseInt(qtd, 10) || 1, 99);
           for (let i = 0; i < vezes; i++) window.adicionarAoCarrinho(id.trim());
         });
+        textoVisivel += '\n\n✅ Pronto! Os produtos foram adicionados ao seu carrinho.';
       }
+
+      window.adicionarBolhaChat(textoVisivel || mensagem.trim(), 'bot');
+      respostaRecebida = true;
 
     } catch (erro) {
       console.warn(
